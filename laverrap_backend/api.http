@@ -1,0 +1,32 @@
+### Login
+POST http://localhost:8000/api/v1/auth/login
+Content-Type: application/json
+
+
+
+{
+    "email": "testing@example.com",
+    "password": "password123"
+}
+
+### Testing enpoint
+GET http://localhost:8000/ 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wN1QyMjowMTozNi43NTZaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3MjkzMTg5MSwiZXhwIjoxNzcyOTM5MDkxfQ.6qxLmtd0fUZMhxjGIbnJIxV6KheUKLXne8tj9nJKMLA
+
+
+### Employees
+GET http://localhost:8000/api/v1/employees
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wN1QyMjowMTozNi43NTZaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0MDc5MCwiZXhwIjoxNzcyOTQ3OTkwfQ.ZbFetB65XJWS-yZYUJ5Prg-bqV6qZ4rglcB6hDISnK8
+
+### Create Employee
+POST http://localhost:8000/api/v1/employees
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwMzo1NDozMi4yMzVaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0MjA4MiwiZXhwIjoxNzcyOTQ5MjgyfQ.iPMg5sVPeBmk39VT6Tr6RiA7bPx-RTOBIu6sOgxIVl4
+Content-Type: application/json
+
+{
+    "name": "CARLOS",
+    "email": "carlos@gmail.com",
+    "phone": "1234567890",
+    "entry_time": "2026-03-08T08:00:00.000Z",
+    "departure_time": "2026-03-08T17:00:00.000Z"
+}

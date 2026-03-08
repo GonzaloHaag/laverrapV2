@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  name      String?    @db.VarChar(255)
+  email     String     @unique @db.VarChar(255)
+  password  String     @db.VarChar(255)
+  createdAt DateTime   @default(now())
+  role      UserRole   @default(ADMIN)
+  employees Employee[]
+  clients   Client[]
+  services  Service[]
+}
+
+model Employee {
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(255)
+  email          String?  @unique @db.VarChar(255)
+  phone          String?  @db.VarChar(40)
+  entry_time     DateTime
+  departure_time DateTime
+  createdAt      DateTime @default(now())
+  status         Status   @default(ACTIVE)
+  user           User     @relation(fields: [user_id], references: [id])
+  user_id         Int
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  email     String?  @unique @db.VarChar(255)
+  phone     String?  @db.VarChar(40)
+  createdAt DateTime @default(now())
+  car_type  CarType  @default(CAR)
+  car_model String   @db.VarChar(100)
+  car_plate String   @db.VarChar(20)
+  status    Status   @default(ACTIVE)
+  user      User     @relation(fields: [user_id], references: [id])
+  user_id    Int
+}
+
+model Service {
+  id          Int             @id @default(autoincrement())
+  name        String          @db.VarChar(255)
+  description String?         @db.Text
+  price       Float
+  createdAt   DateTime        @default(now())
+  category    ServiceCategory @default(BASIC)
+  user        User            @relation(fields: [user_id], references: [id])
+  user_id      Int
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+enum CarType {
+  CAR
+  PICKUP
+  MOTORCYCLE
+  OTHER
+}
+
+enum ServiceCategory {
+  COMPLETE
+  BASIC
+  PREMIUM
+  OTHER
+}
