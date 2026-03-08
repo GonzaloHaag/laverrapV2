@@ -28,7 +28,7 @@ model User {
 model Employee {
   id             Int      @id @default(autoincrement())
   name           String   @db.VarChar(255)
-  email          String?  @unique @db.VarChar(255)
+  email          String?  @db.VarChar(255)
   phone          String?  @db.VarChar(40)
   entry_time     DateTime
   departure_time DateTime
@@ -41,7 +41,7 @@ model Employee {
 model Client {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
-  email     String?  @unique @db.VarChar(255)
+  email     String  @unique @db.VarChar(255)
   phone     String?  @db.VarChar(40)
   createdAt DateTime @default(now())
   car_type  CarType  @default(CAR)
@@ -54,7 +54,7 @@ model Client {
 
 model Service {
   id          Int             @id @default(autoincrement())
-  name        String          @db.VarChar(255)
+  name        String          @unique @db.VarChar(255)
   description String?         @db.Text
   price       Float
   createdAt   DateTime        @default(now())

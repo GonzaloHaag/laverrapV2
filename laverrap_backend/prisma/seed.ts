@@ -15,7 +15,17 @@ async function main() {
       password: await bcrypt.hash("password123", config.SALT_ROUNDS),
     },
   });
-  console.log("Seeders ejecutados correctamente", { testuser });
+
+  const testUserTwo = await prisma.user.upsert({
+    where: { email: "testing2@example.com" },
+    update: {},
+    create: {
+      email: "testing2@example.com",
+      name: "Test User 2",
+      password: await bcrypt.hash("password123", config.SALT_ROUNDS),
+    },
+  });
+  console.log("Seeders ejecutados correctamente", { testuser, testUserTwo });
 }
 main()
   .then(async () => {

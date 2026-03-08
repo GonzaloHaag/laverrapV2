@@ -256,17 +256,17 @@ export type ServiceOrderByWithRelationInput = {
 
 export type ServiceWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  name?: string
   AND?: Prisma.ServiceWhereInput | Prisma.ServiceWhereInput[]
   OR?: Prisma.ServiceWhereInput[]
   NOT?: Prisma.ServiceWhereInput | Prisma.ServiceWhereInput[]
-  name?: Prisma.StringFilter<"Service"> | string
   description?: Prisma.StringNullableFilter<"Service"> | string | null
   price?: Prisma.FloatFilter<"Service"> | number
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   category?: Prisma.EnumServiceCategoryFilter<"Service"> | $Enums.ServiceCategory
   user_id?: Prisma.IntFilter<"Service"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+}, "id" | "name">
 
 export type ServiceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

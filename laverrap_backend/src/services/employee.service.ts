@@ -14,5 +14,26 @@ export const employeeService = {
     }
     const newEmployee = await employeeModel.create({ userId, data });
     return newEmployee;
+  },
+  async update({ userId, employeeId, data } : { userId:number, employeeId: number, data: Employee }) {
+    const findEmployee = await employeeModel.getById({ userId, employeeId });
+    if (!findEmployee) throw new ClientError("Empleado no encontrado", 404);
+    const updatedEmployee = await employeeModel.update({ employeeId, data });
+    return updatedEmployee;
+  },
+  async deactivate({ userId, employeeId } : { userId:number, employeeId: number }) {
+    const findEmployee = await employeeModel.getById({ userId, employeeId });
+    if (!findEmployee) throw new ClientError("Empleado no encontrado", 404);
+    if (findEmployee.status === "INACTIVE") throw new ClientError("El empleado ya está inactivo", 400);
+    const updatedEmployee = await employeeModel.deactivate({ employeeId });
+    return updatedEmployee;
+  },
+
+  async activate({ userId, employeeId } : { userId:number, employeeId: number }) {
+    const findEmployee = await employeeModel.getById({ userId, employeeId });
+    if (!findEmployee) throw new ClientError("Empleado no encontrado", 404);
+    if (findEmployee.status === "ACTIVE") throw new ClientError("El empleado ya está activo", 400);
+    const updatedEmployee = await employeeModel.activate({ employeeId });
+    return updatedEmployee;
   }
 };

@@ -16,17 +16,52 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxL
 
 ### Employees
 GET http://localhost:8000/api/v1/employees
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wN1QyMjowMTozNi43NTZaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0MDc5MCwiZXhwIjoxNzcyOTQ3OTkwfQ.ZbFetB65XJWS-yZYUJ5Prg-bqV6qZ4rglcB6hDISnK8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwNzowNjowOS40OTBaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk1Mzg2NiwiZXhwIjoxNzcyOTYxMDY2fQ.L3VWGishtamsn_Lrdqlgsl_RWXXV11M17i_xWXdGhJc
 
 ### Create Employee
 POST http://localhost:8000/api/v1/employees
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwMzo1NDozMi4yMzVaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0MjA4MiwiZXhwIjoxNzcyOTQ5MjgyfQ.iPMg5sVPeBmk39VT6Tr6RiA7bPx-RTOBIu6sOgxIVl4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJuYW1lIjoiVGVzdCBVc2VyIDIiLCJlbWFpbCI6InRlc3RpbmcyQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwNzowNzo1MC43MTRaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk1MzcwMSwiZXhwIjoxNzcyOTYwOTAxfQ.xC3JI0lPvXhEhSVQNUv9FnqnoEoOyHvb7eUeGCJfFC8
 Content-Type: application/json
 
 {
-    "name": "CARLOS",
-    "email": "carlos@gmail.com",
-    "phone": "1234567890",
+    "name": "Carlos Perez",
+    "email": "carlos77@gmail.com",
+    "phone": null,
     "entry_time": "2026-03-08T08:00:00.000Z",
     "departure_time": "2026-03-08T17:00:00.000Z"
 }
+
+### Deactivate Employee
+PATCH  http://localhost:8000/api/v1/employees/5/deactivate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wN1QyMjowMTozNi43NTZaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0MDc5MCwiZXhwIjoxNzcyOTQ3OTkwfQ.ZbFetB65XJWS-yZYUJ5Prg-bqV6qZ4rglcB6hDISnK8
+
+
+
+### Activate Employee
+PATCH  http://localhost:8000/api/v1/employees/5/activate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wN1QyMjowMTozNi43NTZaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0MDc5MCwiZXhwIjoxNzcyOTQ3OTkwfQ.ZbFetB65XJWS-yZYUJ5Prg-bqV6qZ4rglcB6hDISnK8
+
+
+
+### Services
+GET http://localhost:8000/api/v1/services
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwMzo1NDozMi4yMzVaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0NTMxMCwiZXhwIjoxNzcyOTUyNTEwfQ.ywx78zxKzA8QCTiAcVtLqJN3DLCLsmjUrxcSg9WJhZ0
+
+### Create Service
+POST http://localhost:8000/api/v1/services
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwMzo1NDozMi4yMzVaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0NTMxMCwiZXhwIjoxNzcyOTUyNTEwfQ.ywx78zxKzA8QCTiAcVtLqJN3DLCLsmjUrxcSg9WJhZ0
+Content-Type: application/json
+
+{
+    "name": "Servicio de Prueba 2",
+    "description": "Este es un servicio de prueba",
+    "price": 200,
+    "category": "BASIC"
+}
+
+
+### Delete Service
+DELETE http://localhost:8000/api/v1/services/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiVGVzdCBVc2VyIiwiZW1haWwiOiJ0ZXN0aW5nQGV4YW1wbGUuY29tIiwiY3JlYXRlZEF0IjoiMjAyNi0wMy0wOFQwMzo1NDozMi4yMzVaIiwicm9sZSI6IkFETUlOIn0sImlhdCI6MTc3Mjk0NTMxMCwiZXhwIjoxNzcyOTUyNTEwfQ.ywx78zxKzA8QCTiAcVtLqJN3DLCLsmjUrxcSg9WJhZ0
+
+

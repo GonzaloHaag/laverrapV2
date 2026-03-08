@@ -6,6 +6,7 @@ export const employeeSchema = z.object({
   phone: z.string().min(1, "El teléfono es requerido").nullable(),
   entry_time: z.string().min(1, "La hora de entrada es requerida"),
   departure_time: z.string().min(1, "La hora de salida es requerida"),
+  status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE"),
 });
 
 export type Employee = z.infer<typeof employeeSchema>;

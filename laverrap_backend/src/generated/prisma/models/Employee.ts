@@ -270,11 +270,11 @@ export type EmployeeOrderByWithRelationInput = {
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  email?: string
   AND?: Prisma.EmployeeWhereInput | Prisma.EmployeeWhereInput[]
   OR?: Prisma.EmployeeWhereInput[]
   NOT?: Prisma.EmployeeWhereInput | Prisma.EmployeeWhereInput[]
   name?: Prisma.StringFilter<"Employee"> | string
+  email?: Prisma.StringNullableFilter<"Employee"> | string | null
   phone?: Prisma.StringNullableFilter<"Employee"> | string | null
   entry_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
@@ -282,7 +282,7 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumStatusFilter<"Employee"> | $Enums.Status
   user_id?: Prisma.IntFilter<"Employee"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "email">
+}, "id">
 
 export type EmployeeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

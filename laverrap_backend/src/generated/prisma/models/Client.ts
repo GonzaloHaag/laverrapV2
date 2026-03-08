@@ -216,7 +216,7 @@ export type ClientGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type ClientGroupByOutputType = {
   id: number
   name: string
-  email: string | null
+  email: string
   phone: string | null
   createdAt: Date
   car_type: $Enums.CarType
@@ -252,7 +252,7 @@ export type ClientWhereInput = {
   NOT?: Prisma.ClientWhereInput | Prisma.ClientWhereInput[]
   id?: Prisma.IntFilter<"Client"> | number
   name?: Prisma.StringFilter<"Client"> | string
-  email?: Prisma.StringNullableFilter<"Client"> | string | null
+  email?: Prisma.StringFilter<"Client"> | string
   phone?: Prisma.StringNullableFilter<"Client"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   car_type?: Prisma.EnumCarTypeFilter<"Client"> | $Enums.CarType
@@ -266,7 +266,7 @@ export type ClientWhereInput = {
 export type ClientOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   car_type?: Prisma.SortOrder
@@ -297,7 +297,7 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
 export type ClientOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   car_type?: Prisma.SortOrder
@@ -318,7 +318,7 @@ export type ClientScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ClientScalarWhereWithAggregatesInput | Prisma.ClientScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Client"> | number
   name?: Prisma.StringWithAggregatesFilter<"Client"> | string
-  email?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
+  email?: Prisma.StringWithAggregatesFilter<"Client"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Client"> | Date | string
   car_type?: Prisma.EnumCarTypeWithAggregatesFilter<"Client"> | $Enums.CarType
@@ -330,7 +330,7 @@ export type ClientScalarWhereWithAggregatesInput = {
 
 export type ClientCreateInput = {
   name: string
-  email?: string | null
+  email: string
   phone?: string | null
   createdAt?: Date | string
   car_type?: $Enums.CarType
@@ -343,7 +343,7 @@ export type ClientCreateInput = {
 export type ClientUncheckedCreateInput = {
   id?: number
   name: string
-  email?: string | null
+  email: string
   phone?: string | null
   createdAt?: Date | string
   car_type?: $Enums.CarType
@@ -355,7 +355,7 @@ export type ClientUncheckedCreateInput = {
 
 export type ClientUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -368,7 +368,7 @@ export type ClientUpdateInput = {
 export type ClientUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -381,7 +381,7 @@ export type ClientUncheckedUpdateInput = {
 export type ClientCreateManyInput = {
   id?: number
   name: string
-  email?: string | null
+  email: string
   phone?: string | null
   createdAt?: Date | string
   car_type?: $Enums.CarType
@@ -393,7 +393,7 @@ export type ClientCreateManyInput = {
 
 export type ClientUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -405,7 +405,7 @@ export type ClientUpdateManyMutationInput = {
 export type ClientUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -522,7 +522,7 @@ export type EnumCarTypeFieldUpdateOperationsInput = {
 
 export type ClientCreateWithoutUserInput = {
   name: string
-  email?: string | null
+  email: string
   phone?: string | null
   createdAt?: Date | string
   car_type?: $Enums.CarType
@@ -534,7 +534,7 @@ export type ClientCreateWithoutUserInput = {
 export type ClientUncheckedCreateWithoutUserInput = {
   id?: number
   name: string
-  email?: string | null
+  email: string
   phone?: string | null
   createdAt?: Date | string
   car_type?: $Enums.CarType
@@ -575,7 +575,7 @@ export type ClientScalarWhereInput = {
   NOT?: Prisma.ClientScalarWhereInput | Prisma.ClientScalarWhereInput[]
   id?: Prisma.IntFilter<"Client"> | number
   name?: Prisma.StringFilter<"Client"> | string
-  email?: Prisma.StringNullableFilter<"Client"> | string | null
+  email?: Prisma.StringFilter<"Client"> | string
   phone?: Prisma.StringNullableFilter<"Client"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   car_type?: Prisma.EnumCarTypeFilter<"Client"> | $Enums.CarType
@@ -588,7 +588,7 @@ export type ClientScalarWhereInput = {
 export type ClientCreateManyUserInput = {
   id?: number
   name: string
-  email?: string | null
+  email: string
   phone?: string | null
   createdAt?: Date | string
   car_type?: $Enums.CarType
@@ -599,7 +599,7 @@ export type ClientCreateManyUserInput = {
 
 export type ClientUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -611,7 +611,7 @@ export type ClientUpdateWithoutUserInput = {
 export type ClientUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -623,7 +623,7 @@ export type ClientUncheckedUpdateWithoutUserInput = {
 export type ClientUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   car_type?: Prisma.EnumCarTypeFieldUpdateOperationsInput | $Enums.CarType
@@ -708,7 +708,7 @@ export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
-    email: string | null
+    email: string
     phone: string | null
     createdAt: Date
     car_type: $Enums.CarType

@@ -14,16 +14,23 @@ export const employeeModel = {
   async create({ userId, data } : { userId:number, data: Employee }) {
     const newEmployee = await prisma.employee.create({
       data: {
-        user_id: userId,
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        entry_time: data.entry_time,
-        departure_time: data.departure_time
+        ...data,
+        user_id: userId
       }
     });
 
     return newEmployee;
+  },
+
+  async update({ employeeId, data } : { employeeId: number, data: Employee }) {
+    const updatedEmployee = await prisma.employee.update({
+      where: {
+        id: employeeId
+      },
+      data
+    });
+
+    return updatedEmployee;
   },
 
   async getById({ userId, employeeId } : { userId:number, employeeId: number }) {
@@ -44,5 +51,31 @@ export const employeeModel = {
       }
     });
     return employee;
+  },
+
+  async deactivate({ employeeId } : { employeeId: number }) {
+    const updatedEmployee = await prisma.employee.update({
+      where: {
+        id: employeeId
+      },
+      data: {
+        status: "INACTIVE"
+      }
+    });
+
+    return updatedEmployee;
+  },
+
+  async activate({ employeeId } : { employeeId: number }) {
+    const updatedEmployee = await prisma.employee.update({
+      where: {
+        id: employeeId
+      },
+      data: {
+        status: "ACTIVE"
+      }
+    });
+
+    return updatedEmployee;
   }
 };
