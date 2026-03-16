@@ -2,6 +2,7 @@ import { PRIVATE_ROUTES } from "@/utils/routes";
 import { Link } from "react-router";
 import { BubblesIcon } from "lucide-react";
 import { Navbar } from "./Navbar";
+import { ButtonLogout } from "./ButtonLogout";
 
 export const Header = () => {
   return (
@@ -16,7 +17,7 @@ export const Header = () => {
         </Link>
         <Navbar />
         <div className="flex grow basis-0 justify-end">
-          User profile
+          <ButtonLogout />
         </div>
       </div>
     </header>

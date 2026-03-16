@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { InputForm, SelectForm } from "../shared";
+import { FormDialogFooter, InputForm, SelectForm } from "../shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { serviceSchema } from "@/schemas";
 import { SERVICES_CATEGORY } from "@/utils/consts";
@@ -56,6 +56,7 @@ export const FormService = ({ service }: Props) => {
           rows={4}
         />
       </Field>
+      <FormDialogFooter isSubmitting={false} />
     </form>
   );
 };
