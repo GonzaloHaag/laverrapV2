@@ -29,12 +29,14 @@ export type AggregateService = {
 export type ServiceAvgAggregateOutputType = {
   id: number | null
   price: number | null
+  duration: number | null
   user_id: number | null
 }
 
 export type ServiceSumAggregateOutputType = {
   id: number | null
   price: number | null
+  duration: number | null
   user_id: number | null
 }
 
@@ -45,6 +47,7 @@ export type ServiceMinAggregateOutputType = {
   price: number | null
   createdAt: Date | null
   category: $Enums.ServiceCategory | null
+  duration: number | null
   user_id: number | null
 }
 
@@ -55,6 +58,7 @@ export type ServiceMaxAggregateOutputType = {
   price: number | null
   createdAt: Date | null
   category: $Enums.ServiceCategory | null
+  duration: number | null
   user_id: number | null
 }
 
@@ -65,6 +69,7 @@ export type ServiceCountAggregateOutputType = {
   price: number
   createdAt: number
   category: number
+  duration: number
   user_id: number
   _all: number
 }
@@ -73,12 +78,14 @@ export type ServiceCountAggregateOutputType = {
 export type ServiceAvgAggregateInputType = {
   id?: true
   price?: true
+  duration?: true
   user_id?: true
 }
 
 export type ServiceSumAggregateInputType = {
   id?: true
   price?: true
+  duration?: true
   user_id?: true
 }
 
@@ -89,6 +96,7 @@ export type ServiceMinAggregateInputType = {
   price?: true
   createdAt?: true
   category?: true
+  duration?: true
   user_id?: true
 }
 
@@ -99,6 +107,7 @@ export type ServiceMaxAggregateInputType = {
   price?: true
   createdAt?: true
   category?: true
+  duration?: true
   user_id?: true
 }
 
@@ -109,6 +118,7 @@ export type ServiceCountAggregateInputType = {
   price?: true
   createdAt?: true
   category?: true
+  duration?: true
   user_id?: true
   _all?: true
 }
@@ -206,6 +216,7 @@ export type ServiceGroupByOutputType = {
   price: number
   createdAt: Date
   category: $Enums.ServiceCategory
+  duration: number
   user_id: number
   _count: ServiceCountAggregateOutputType | null
   _avg: ServiceAvgAggregateOutputType | null
@@ -239,6 +250,7 @@ export type ServiceWhereInput = {
   price?: Prisma.FloatFilter<"Service"> | number
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   category?: Prisma.EnumServiceCategoryFilter<"Service"> | $Enums.ServiceCategory
+  duration?: Prisma.IntFilter<"Service"> | number
   user_id?: Prisma.IntFilter<"Service"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
@@ -250,6 +262,7 @@ export type ServiceOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -264,6 +277,7 @@ export type ServiceWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.FloatFilter<"Service"> | number
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   category?: Prisma.EnumServiceCategoryFilter<"Service"> | $Enums.ServiceCategory
+  duration?: Prisma.IntFilter<"Service"> | number
   user_id?: Prisma.IntFilter<"Service"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "name">
@@ -275,6 +289,7 @@ export type ServiceOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   _count?: Prisma.ServiceCountOrderByAggregateInput
   _avg?: Prisma.ServiceAvgOrderByAggregateInput
@@ -293,6 +308,7 @@ export type ServiceScalarWhereWithAggregatesInput = {
   price?: Prisma.FloatWithAggregatesFilter<"Service"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Service"> | Date | string
   category?: Prisma.EnumServiceCategoryWithAggregatesFilter<"Service"> | $Enums.ServiceCategory
+  duration?: Prisma.IntWithAggregatesFilter<"Service"> | number
   user_id?: Prisma.IntWithAggregatesFilter<"Service"> | number
 }
 
@@ -302,6 +318,7 @@ export type ServiceCreateInput = {
   price: number
   createdAt?: Date | string
   category?: $Enums.ServiceCategory
+  duration: number
   user: Prisma.UserCreateNestedOneWithoutServicesInput
 }
 
@@ -312,6 +329,7 @@ export type ServiceUncheckedCreateInput = {
   price: number
   createdAt?: Date | string
   category?: $Enums.ServiceCategory
+  duration: number
   user_id: number
 }
 
@@ -321,6 +339,7 @@ export type ServiceUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
 }
 
@@ -331,6 +350,7 @@ export type ServiceUncheckedUpdateInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -341,6 +361,7 @@ export type ServiceCreateManyInput = {
   price: number
   createdAt?: Date | string
   category?: $Enums.ServiceCategory
+  duration: number
   user_id: number
 }
 
@@ -350,6 +371,7 @@ export type ServiceUpdateManyMutationInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ServiceUncheckedUpdateManyInput = {
@@ -359,6 +381,7 @@ export type ServiceUncheckedUpdateManyInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -379,12 +402,14 @@ export type ServiceCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
 
 export type ServiceAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
 
@@ -395,6 +420,7 @@ export type ServiceMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
 
@@ -405,12 +431,14 @@ export type ServiceMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   category?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
 
 export type ServiceSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  duration?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
 
@@ -474,6 +502,7 @@ export type ServiceCreateWithoutUserInput = {
   price: number
   createdAt?: Date | string
   category?: $Enums.ServiceCategory
+  duration: number
 }
 
 export type ServiceUncheckedCreateWithoutUserInput = {
@@ -483,6 +512,7 @@ export type ServiceUncheckedCreateWithoutUserInput = {
   price: number
   createdAt?: Date | string
   category?: $Enums.ServiceCategory
+  duration: number
 }
 
 export type ServiceCreateOrConnectWithoutUserInput = {
@@ -521,6 +551,7 @@ export type ServiceScalarWhereInput = {
   price?: Prisma.FloatFilter<"Service"> | number
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   category?: Prisma.EnumServiceCategoryFilter<"Service"> | $Enums.ServiceCategory
+  duration?: Prisma.IntFilter<"Service"> | number
   user_id?: Prisma.IntFilter<"Service"> | number
 }
 
@@ -531,6 +562,7 @@ export type ServiceCreateManyUserInput = {
   price: number
   createdAt?: Date | string
   category?: $Enums.ServiceCategory
+  duration: number
 }
 
 export type ServiceUpdateWithoutUserInput = {
@@ -539,6 +571,7 @@ export type ServiceUpdateWithoutUserInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ServiceUncheckedUpdateWithoutUserInput = {
@@ -548,6 +581,7 @@ export type ServiceUncheckedUpdateWithoutUserInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ServiceUncheckedUpdateManyWithoutUserInput = {
@@ -557,6 +591,7 @@ export type ServiceUncheckedUpdateManyWithoutUserInput = {
   price?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   category?: Prisma.EnumServiceCategoryFieldUpdateOperationsInput | $Enums.ServiceCategory
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -568,6 +603,7 @@ export type ServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   price?: boolean
   createdAt?: boolean
   category?: boolean
+  duration?: boolean
   user_id?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["service"]>
@@ -579,6 +615,7 @@ export type ServiceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   price?: boolean
   createdAt?: boolean
   category?: boolean
+  duration?: boolean
   user_id?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["service"]>
@@ -590,6 +627,7 @@ export type ServiceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   price?: boolean
   createdAt?: boolean
   category?: boolean
+  duration?: boolean
   user_id?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["service"]>
@@ -601,10 +639,11 @@ export type ServiceSelectScalar = {
   price?: boolean
   createdAt?: boolean
   category?: boolean
+  duration?: boolean
   user_id?: boolean
 }
 
-export type ServiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "createdAt" | "category" | "user_id", ExtArgs["result"]["service"]>
+export type ServiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "price" | "createdAt" | "category" | "duration" | "user_id", ExtArgs["result"]["service"]>
 export type ServiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -627,6 +666,7 @@ export type $ServicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     price: number
     createdAt: Date
     category: $Enums.ServiceCategory
+    duration: number
     user_id: number
   }, ExtArgs["result"]["service"]>
   composites: {}
@@ -1058,6 +1098,7 @@ export interface ServiceFieldRefs {
   readonly price: Prisma.FieldRef<"Service", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Service", 'DateTime'>
   readonly category: Prisma.FieldRef<"Service", 'ServiceCategory'>
+  readonly duration: Prisma.FieldRef<"Service", 'Int'>
   readonly user_id: Prisma.FieldRef<"Service", 'Int'>
 }
     

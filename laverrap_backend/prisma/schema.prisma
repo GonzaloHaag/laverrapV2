@@ -35,13 +35,13 @@ model Employee {
   createdAt      DateTime @default(now())
   status         Status   @default(ACTIVE)
   user           User     @relation(fields: [user_id], references: [id])
-  user_id         Int
+  user_id        Int
 }
 
 model Client {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
-  email     String  @unique @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
   phone     String?  @db.VarChar(40)
   createdAt DateTime @default(now())
   car_type  CarType  @default(CAR)
@@ -49,7 +49,7 @@ model Client {
   car_plate String   @db.VarChar(20)
   status    Status   @default(ACTIVE)
   user      User     @relation(fields: [user_id], references: [id])
-  user_id    Int
+  user_id   Int
 }
 
 model Service {
@@ -59,8 +59,9 @@ model Service {
   price       Float
   createdAt   DateTime        @default(now())
   category    ServiceCategory @default(BASIC)
+  duration    Int
   user        User            @relation(fields: [user_id], references: [id])
-  user_id      Int
+  user_id     Int
 }
 
 enum UserRole {

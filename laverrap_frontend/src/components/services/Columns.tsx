@@ -13,6 +13,14 @@ export const Columns: ColumnDef<Service>[] = [
     header: "Descripción",
   },
   {
+    accessorKey: "duration",
+    header: "Duración (min)",
+    cell: ({ row }) => {
+      const duration = row.getValue("duration");
+      return duration ? `${duration} min` : "0 min";
+    }
+  },
+  {
     accessorKey: "price",
     header: "Precio",
     cell: ({ row }) => {

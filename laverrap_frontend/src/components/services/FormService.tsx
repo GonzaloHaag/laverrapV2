@@ -36,9 +36,9 @@ export const FormService = ({ service }: Props) => {
         <InputForm
           label="Precio"
           htmlFor="price"
-          placeholder="Ej: 25.00"
+          placeholder="$0.00"
           type="number"
-          {...register("price")}
+          {...register("price", { valueAsNumber: true })}
           error={errors.price?.message}
         />
         <SelectForm
@@ -48,6 +48,14 @@ export const FormService = ({ service }: Props) => {
           {...register("category")}
         />
       </div>
+      <InputForm
+        label="Duración aprox. (minutos)"
+        htmlFor="duration"
+        placeholder="0"
+        type="number"
+        {...register("duration",{ valueAsNumber: true })}
+        error={errors.duration?.message}
+      />
       <Field className="flex flex-col gap-y-1">
         <FieldLabel htmlFor="description">Descripción</FieldLabel>
         <Textarea

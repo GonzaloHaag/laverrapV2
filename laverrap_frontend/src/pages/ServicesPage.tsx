@@ -1,5 +1,13 @@
 import { Columns, DialogService } from "@/components/services";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  DataTable,
+} from "@/components/ui";
 import { serviceService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
@@ -14,13 +22,21 @@ export const ServicesPage = () => {
       <Card>
         <CardHeader>
           <CardTitle>Servicios</CardTitle>
-          <CardDescription>Administra los servicios de tu lavadero</CardDescription>
+          <CardDescription>
+            Administra los servicios de tu lavadero
+          </CardDescription>
           <CardAction>
             <DialogService service={null} />
           </CardAction>
         </CardHeader>
         <CardContent>
-          <DataTable isLoading={query.isLoading} columns={Columns} data={query.data ?? []} />
+          <DataTable
+            isLoading={query.isLoading}
+            columns={Columns}
+            data={query.data ?? []}
+            searchPlaceholder="Buscar por nombre..."
+            searchFilter="name"
+          />
         </CardContent>
       </Card>
     </section>
