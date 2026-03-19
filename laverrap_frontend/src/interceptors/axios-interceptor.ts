@@ -46,6 +46,15 @@ export const axiosInterceptor = () => {
     if(!status) {
       toast.error("Error de red, verifica tu conexión");
     }
+    if(status === 400) {
+      toast.error(error.response.data.message);
+      return Promise.reject(new Error(error.response.data.message));
+    }
+
+    if(status === 404) {
+      toast.error("Recurso no encontrado");
+      return Promise.reject(new Error("Recurso no encontrado"));
+    }
     return Promise.reject(error);
   });
 };

@@ -1,10 +1,23 @@
+import { CardChartIncome, CardChartWashed, CardRecentWashed, CardTopEmployees, SectionCards } from "@/components/dashboard";
+
 export const DashboardPage = () => {
   return (
     <section className="flex flex-col gap-y-4">
-      <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-      <p className="text-muted-foreground">
-        Welcome to your dashboard! Here you can manage your account and view your activity.
-      </p>
+      <div className="flex flex-col gap-0">
+        <h1 className="text-2xl font-semibold">DASHBOARD</h1>
+        <span className="text-sm text-gray-500">
+          Resumen general del negocio
+        </span>
+      </div>
+      <SectionCards />
+      <div className="grid md:grid-cols-2 gap-4">
+        <CardChartIncome />
+        <CardChartWashed />
+      </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        <CardRecentWashed />
+        <CardTopEmployees />
+      </div>
     </section>
   );
 };

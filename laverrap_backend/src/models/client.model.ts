@@ -5,7 +5,11 @@ export const clientModel = {
   async getAll({ userId }: { userId: number }) {
     const clients = await prisma.client.findMany({
       where: {
-        user_id: userId
+        user_id: userId,
+        status: "ACTIVE"
+      },
+      orderBy: {
+        createdAt: "desc"
       }
     });
     return clients;

@@ -1,7 +1,16 @@
-import type { Service } from "@/types";
+import type { Service, ServiceCategory } from "@/types";
 import { formatCurrency } from "@/utils/formatters";
 import { type ColumnDef } from "@tanstack/react-table";
-import { DialogService } from "./DialogService";
+import { ColumnActions } from "./ColumnActions";
+import { Badge } from "../ui";
+
+
+const formatCategory: Record<ServiceCategory, "Básico" | "Completo" | "Premium" | "Otra"> = {
+  BASIC: "Básico",
+  COMPLETE: "Completo",
+  PREMIUM: "Premium",
+  OTHER: "Otra"
+};
 
 export const Columns: ColumnDef<Service>[] = [
   {
@@ -31,20 +40,17 @@ export const Columns: ColumnDef<Service>[] = [
   {
     accessorKey: "category",
     header: "Categoría",
+    cell: ({ row }) => {
+      const category: ServiceCategory = row.getValue("category");
+      return (
+        <Badge variant={"outline"} title={formatCategory[category]}>
+          {formatCategory[category]}
+        </Badge>
+      );
+    }
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const service = row.original;
-      return (
-        <div>
-          <DialogService service={service} />
-          {/* <AlertDialogConfirm
-        onClickConfirm={onClickConfirmDeleteService}
-        isRestore={false}
-      /> */}
-        </div>
-      );
-    }
+    cell: ({ row }) => <ColumnActions service={row.original} />
   }
 ];

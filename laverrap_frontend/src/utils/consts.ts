@@ -39,3 +39,8 @@ export const SERVICES_CATEGORY = [
   { id: 3, label: "Premium", value: "PREMIUM" },
   { id: 4, label: "Otro", value: "OTHER" }
 ];
+
+export const STATUS_OPTIONS = [
+  { id: 1, label: "Activo", value: "ACTIVE" },
+  { id: 2, label: "Inactivo", value: "INACTIVE" }
+];

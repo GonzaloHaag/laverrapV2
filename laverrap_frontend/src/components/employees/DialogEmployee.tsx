@@ -1,13 +1,20 @@
 import { PencilIcon, PlusCircleIcon } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui";
 import type { Employee } from "@/types";
+import { FormEmployee } from "./FormEmployee";
+import { useState } from "react";
 
 interface Props {
   employee: Employee | null
 }
 export const DialogEmployee = ({ employee }: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const closeDialog = () => {
+    setOpen(false);
+  };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={
         <Button type="button" variant={employee ? "outline" : "default"} title="Agregar empleado" size={employee ? "icon" : "lg"}>
           {
@@ -30,7 +37,7 @@ export const DialogEmployee = ({ employee }: Props) => {
             Completa el formulario para agregar un nuevo empleado a tu sistema.
           </DialogDescription>
         </DialogHeader>
-        {/* <FormService service={service} /> */}
+        <FormEmployee employee={employee} closeDialog={closeDialog} />
       </DialogContent>
     </Dialog>
   );

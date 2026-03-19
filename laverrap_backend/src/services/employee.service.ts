@@ -12,6 +12,22 @@ export const employeeService = {
       const existingEmployee = await employeeModel.getByEmail({ userId, email: data.email });
       if (existingEmployee) throw new ClientError("Ya existe un empleado con ese email", 400);
     }
+    if (data.entry_time) {
+      const date = new Date(data.entry_time);
+      if (isNaN(date.getTime())) {
+        throw new ClientError("Fecha inválida, se espera formato ISO-8601", 400);
+      }
+      // convertimos a UTC ISO-8601 para guardar en la DB
+      data.entry_time = date.toISOString();
+    }
+    if(data.departure_time) {
+      const date = new Date(data.departure_time);
+      if (isNaN(date.getTime())) {
+        throw new ClientError("Fecha inválida, se espera formato ISO-8601", 400);
+      }
+      // convertimos a UTC ISO-8601 para guardar en la DB
+      data.departure_time = date.toISOString();
+    }
     const newEmployee = await employeeModel.create({ userId, data });
     return newEmployee;
   },

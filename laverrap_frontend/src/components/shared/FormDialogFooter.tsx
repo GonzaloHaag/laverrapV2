@@ -4,7 +4,7 @@ interface Props {
 }
 export const FormDialogFooter = ({ isSubmitting }: Props) => {
   return (
-    <DialogFooter>
+    <DialogFooter className="col-span-2">
       <DialogClose render={ 
         <Button type="button" variant={"outline"} title="Cancelar" className="min-w-32">
           Cancelar

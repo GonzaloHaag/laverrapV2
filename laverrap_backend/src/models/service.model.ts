@@ -7,6 +7,9 @@ export const serviceModel = {
       where: {
         user_id: userId,
       },
+      orderBy: {
+        createdAt: "desc",
+      }
     });
     return services;
   },

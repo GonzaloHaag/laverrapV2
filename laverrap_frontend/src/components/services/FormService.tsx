@@ -5,22 +5,34 @@ import { serviceSchema } from "@/schemas";
 import { SERVICES_CATEGORY } from "@/utils/consts";
 import { Field, FieldLabel, Textarea } from "../ui";
 import type { Service } from "@/types";
+import { useServiceMutations } from "@/hooks";
+import { toast } from "sonner";
 interface Props {
   service: Service | null;
+  closeDialog: () => void;
 }
-export const FormService = ({ service }: Props) => {
+export const FormService = ({ service, closeDialog }: Props) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(serviceSchema),
+    mode: "onSubmit",
     defaultValues: {
       name: service?.name || "",
       description: service?.description || "",
       price: service?.price || 0,
-      category: service?.category || "BASIC"
+      category: service?.category || "BASIC",
+      duration: service?.duration || 0,
     }
   });
+  const { mutationCreate, mutationUpdate } = useServiceMutations();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    if(service) {
+      await mutationUpdate.mutateAsync({ id: service.id, payload: data });
+    } else {
+      await mutationCreate.mutateAsync({ payload: data });
+    }
+    closeDialog();
+    toast.success(`Servicio ${service ? "actualizado" : "creado"} exitosamente`);
   });
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-y-4 w-full">
@@ -64,7 +76,7 @@ export const FormService = ({ service }: Props) => {
           rows={4}
         />
       </Field>
-      <FormDialogFooter isSubmitting={false} />
+      <FormDialogFooter isSubmitting={mutationCreate.isPending || mutationUpdate.isPending} />
     </form>
   );
 };

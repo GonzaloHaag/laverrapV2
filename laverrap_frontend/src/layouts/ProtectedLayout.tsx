@@ -7,7 +7,7 @@ export const ProtectedLayout = () => {
   return (
     <AuthGuard>
       <Header />
-      <main className="bg-red-200 min-h-[calc(100svh-5rem)]">
+      <main className="min-h-[calc(100svh-5rem)] bg-background">
         <div className="container max-w-7xl w-full mx-auto p-4">
           <Outlet />
         </div>
