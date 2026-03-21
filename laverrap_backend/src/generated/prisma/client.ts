@@ -61,3 +61,8 @@ export type Client = Prisma.ClientModel
  * 
  */
 export type Service = Prisma.ServiceModel
+/**
+ * Model Washing
+ * 
+ */
+export type Washing = Prisma.WashingModel

@@ -8,7 +8,7 @@ export const serviceModel = {
         user_id: userId,
       },
       orderBy: {
-        createdAt: "desc",
+        created_at: "desc",
       }
     });
     return services;

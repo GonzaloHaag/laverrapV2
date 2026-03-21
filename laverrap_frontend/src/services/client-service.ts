@@ -16,4 +16,9 @@ export const clientService = {
     const { data } = await api.put<ServiceResponse<Client>>(`${CLIENTS_URL}/${id}`, payload);
     return data.data;
   },
+
+  deactivate: async ({ id } : { id: Client["id"] }) => {
+    const { data } = await api.patch<ServiceResponse<null>>(`${CLIENTS_URL}/${id}/deactivate`);
+    return data.data;
+  }
 };

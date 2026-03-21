@@ -6,7 +6,8 @@ export const clientSchema = z.object({
   phone: z.string().optional(),
   car_type: z.enum(["CAR", "PICKUP", "MOTORCYCLE", "OTHER"],"El tipo de vehículo es requerido"),
   car_model: z.string().min(1, "El modelo del vehículo es requerido"),
-  car_plate: z.string().min(1, "La placa del vehículo es requerida")
+  car_plate: z.string().min(1, "La placa del vehículo es requerida"),
+  status: z.enum(["ACTIVE", "INACTIVE"]).default("ACTIVE")
 });
 
 export type ClientDto = z.infer<typeof clientSchema>;

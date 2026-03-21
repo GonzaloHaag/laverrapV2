@@ -387,7 +387,8 @@ export const ModelName = {
   User: 'User',
   Employee: 'Employee',
   Client: 'Client',
-  Service: 'Service'
+  Service: 'Service',
+  Washing: 'Washing'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "employee" | "client" | "service"
+    modelProps: "user" | "employee" | "client" | "service" | "washing"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +704,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Washing: {
+      payload: Prisma.$WashingPayload<ExtArgs>
+      fields: Prisma.WashingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WashingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WashingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>
+        }
+        findFirst: {
+          args: Prisma.WashingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WashingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>
+        }
+        findMany: {
+          args: Prisma.WashingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>[]
+        }
+        create: {
+          args: Prisma.WashingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>
+        }
+        createMany: {
+          args: Prisma.WashingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WashingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>[]
+        }
+        delete: {
+          args: Prisma.WashingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>
+        }
+        update: {
+          args: Prisma.WashingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>
+        }
+        deleteMany: {
+          args: Prisma.WashingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WashingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WashingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>[]
+        }
+        upsert: {
+          args: Prisma.WashingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WashingPayload>
+        }
+        aggregate: {
+          args: Prisma.WashingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWashing>
+        }
+        groupBy: {
+          args: Prisma.WashingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WashingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WashingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WashingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -747,7 +822,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   role: 'role'
 } as const
 
@@ -761,7 +836,7 @@ export const EmployeeScalarFieldEnum = {
   phone: 'phone',
   entry_time: 'entry_time',
   departure_time: 'departure_time',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   status: 'status',
   user_id: 'user_id'
 } as const
@@ -774,7 +849,7 @@ export const ClientScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   car_type: 'car_type',
   car_model: 'car_model',
   car_plate: 'car_plate',
@@ -790,13 +865,28 @@ export const ServiceScalarFieldEnum = {
   name: 'name',
   description: 'description',
   price: 'price',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   category: 'category',
   duration: 'duration',
   user_id: 'user_id'
 } as const
 
 export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const WashingScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  user_id: 'user_id',
+  employee_id: 'employee_id',
+  client_id: 'client_id',
+  service_id: 'service_id',
+  status: 'status',
+  should_notify: 'should_notify',
+  notified_at: 'notified_at'
+} as const
+
+export type WashingScalarFieldEnum = (typeof WashingScalarFieldEnum)[keyof typeof WashingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -914,16 +1004,16 @@ export type ListEnumCarTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'Decimal'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
 /**
- * Reference to a field of type 'Float[]'
+ * Reference to a field of type 'Decimal[]'
  */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -938,6 +1028,41 @@ export type EnumServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$
  * Reference to a field of type 'ServiceCategory[]'
  */
 export type ListEnumServiceCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'WashingStatus'
+ */
+export type EnumWashingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WashingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'WashingStatus[]'
+ */
+export type ListEnumWashingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WashingStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1039,6 +1164,7 @@ export type GlobalOmitConfig = {
   employee?: Prisma.EmployeeOmit
   client?: Prisma.ClientOmit
   service?: Prisma.ServiceOmit
+  washing?: Prisma.WashingOmit
 }
 
 /* Types for Logging */

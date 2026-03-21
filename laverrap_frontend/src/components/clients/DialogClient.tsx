@@ -2,6 +2,7 @@ import { PencilIcon, PlusCircleIcon } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui";
 import type { Client } from "@/types";
 import { useState } from "react";
+import { FormClient } from "./FormClient";
 
 interface Props {
   client: Client | null;
@@ -37,6 +38,7 @@ export const DialogClient = ({ client }: Props) => {
           </DialogDescription>
         </DialogHeader>
         {/* <FormEmployee employee={employee} closeDialog={closeDialog} /> */}
+        <FormClient client={client} closeDialog={closeDialog} />
       </DialogContent>
     </Dialog>
   );

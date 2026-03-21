@@ -43,3 +43,13 @@ export const ServiceCategory = {
 } as const
 
 export type ServiceCategory = (typeof ServiceCategory)[keyof typeof ServiceCategory]
+
+
+export const WashingStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED'
+} as const
+
+export type WashingStatus = (typeof WashingStatus)[keyof typeof WashingStatus]

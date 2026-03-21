@@ -12,6 +12,7 @@ interface Props {
   closeDialog: () => void;
 }
 export const FormService = ({ service, closeDialog }: Props) => {
+  const { mutationCreate, mutationUpdate } = useServiceMutations();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(serviceSchema),
     mode: "onSubmit",
@@ -23,7 +24,6 @@ export const FormService = ({ service, closeDialog }: Props) => {
       duration: service?.duration || 0,
     }
   });
-  const { mutationCreate, mutationUpdate } = useServiceMutations();
 
   const onSubmit = handleSubmit(async (data) => {
     if(service) {

@@ -9,7 +9,7 @@ export const employeeModel = {
         status: "ACTIVE"
       },
       orderBy: {
-        createdAt: "desc"
+        created_at: "desc"
       }
     });
     return employees;

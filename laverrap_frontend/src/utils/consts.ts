@@ -40,7 +40,15 @@ export const SERVICES_CATEGORY = [
   { id: 4, label: "Otro", value: "OTHER" }
 ];
 
+
 export const STATUS_OPTIONS = [
   { id: 1, label: "Activo", value: "ACTIVE" },
   { id: 2, label: "Inactivo", value: "INACTIVE" }
+];
+
+export const TYPES_OF_VEHICLES = [
+  { id: 1, value: "CAR", label: "Auto" },
+  { id: 2, value: "PICKUP", label: "Camioneta" },
+  { id: 3, value: "MOTORCYCLE", label: "Moto" },
+  { id: 4, value: "OTHER", label: "Otro" },
 ];

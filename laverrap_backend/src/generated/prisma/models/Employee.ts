@@ -43,7 +43,7 @@ export type EmployeeMinAggregateOutputType = {
   phone: string | null
   entry_time: Date | null
   departure_time: Date | null
-  createdAt: Date | null
+  created_at: Date | null
   status: $Enums.Status | null
   user_id: number | null
 }
@@ -55,7 +55,7 @@ export type EmployeeMaxAggregateOutputType = {
   phone: string | null
   entry_time: Date | null
   departure_time: Date | null
-  createdAt: Date | null
+  created_at: Date | null
   status: $Enums.Status | null
   user_id: number | null
 }
@@ -67,7 +67,7 @@ export type EmployeeCountAggregateOutputType = {
   phone: number
   entry_time: number
   departure_time: number
-  createdAt: number
+  created_at: number
   status: number
   user_id: number
   _all: number
@@ -91,7 +91,7 @@ export type EmployeeMinAggregateInputType = {
   phone?: true
   entry_time?: true
   departure_time?: true
-  createdAt?: true
+  created_at?: true
   status?: true
   user_id?: true
 }
@@ -103,7 +103,7 @@ export type EmployeeMaxAggregateInputType = {
   phone?: true
   entry_time?: true
   departure_time?: true
-  createdAt?: true
+  created_at?: true
   status?: true
   user_id?: true
 }
@@ -115,7 +115,7 @@ export type EmployeeCountAggregateInputType = {
   phone?: true
   entry_time?: true
   departure_time?: true
-  createdAt?: true
+  created_at?: true
   status?: true
   user_id?: true
   _all?: true
@@ -214,7 +214,7 @@ export type EmployeeGroupByOutputType = {
   phone: string | null
   entry_time: Date
   departure_time: Date
-  createdAt: Date
+  created_at: Date
   status: $Enums.Status
   user_id: number
   _count: EmployeeCountAggregateOutputType | null
@@ -249,10 +249,11 @@ export type EmployeeWhereInput = {
   phone?: Prisma.StringNullableFilter<"Employee"> | string | null
   entry_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
   status?: Prisma.EnumStatusFilter<"Employee"> | $Enums.Status
   user_id?: Prisma.IntFilter<"Employee"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  washed?: Prisma.WashingListRelationFilter
 }
 
 export type EmployeeOrderByWithRelationInput = {
@@ -262,10 +263,11 @@ export type EmployeeOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   entry_time?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   status?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  washed?: Prisma.WashingOrderByRelationAggregateInput
 }
 
 export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -278,10 +280,11 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"Employee"> | string | null
   entry_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
   status?: Prisma.EnumStatusFilter<"Employee"> | $Enums.Status
   user_id?: Prisma.IntFilter<"Employee"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  washed?: Prisma.WashingListRelationFilter
 }, "id">
 
 export type EmployeeOrderByWithAggregationInput = {
@@ -291,7 +294,7 @@ export type EmployeeOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   entry_time?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   status?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   _count?: Prisma.EmployeeCountOrderByAggregateInput
@@ -311,7 +314,7 @@ export type EmployeeScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Employee"> | string | null
   entry_time?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
   departure_time?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"Employee"> | Date | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Employee"> | $Enums.Status
   user_id?: Prisma.IntWithAggregatesFilter<"Employee"> | number
 }
@@ -322,9 +325,10 @@ export type EmployeeCreateInput = {
   phone?: string | null
   entry_time: Date | string
   departure_time: Date | string
-  createdAt?: Date | string
+  created_at?: Date | string
   status?: $Enums.Status
   user: Prisma.UserCreateNestedOneWithoutEmployeesInput
+  washed?: Prisma.WashingCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateInput = {
@@ -334,9 +338,10 @@ export type EmployeeUncheckedCreateInput = {
   phone?: string | null
   entry_time: Date | string
   departure_time: Date | string
-  createdAt?: Date | string
+  created_at?: Date | string
   status?: $Enums.Status
   user_id: number
+  washed?: Prisma.WashingUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUpdateInput = {
@@ -345,9 +350,10 @@ export type EmployeeUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   user?: Prisma.UserUpdateOneRequiredWithoutEmployeesNestedInput
+  washed?: Prisma.WashingUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateInput = {
@@ -357,9 +363,10 @@ export type EmployeeUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  washed?: Prisma.WashingUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeCreateManyInput = {
@@ -369,7 +376,7 @@ export type EmployeeCreateManyInput = {
   phone?: string | null
   entry_time: Date | string
   departure_time: Date | string
-  createdAt?: Date | string
+  created_at?: Date | string
   status?: $Enums.Status
   user_id: number
 }
@@ -380,7 +387,7 @@ export type EmployeeUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
@@ -391,7 +398,7 @@ export type EmployeeUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -413,7 +420,7 @@ export type EmployeeCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   entry_time?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   status?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
@@ -430,7 +437,7 @@ export type EmployeeMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   entry_time?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   status?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
@@ -442,7 +449,7 @@ export type EmployeeMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   entry_time?: Prisma.SortOrder
   departure_time?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
   status?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
 }
@@ -450,6 +457,11 @@ export type EmployeeMinOrderByAggregateInput = {
 export type EmployeeSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+}
+
+export type EmployeeScalarRelationFilter = {
+  is?: Prisma.EmployeeWhereInput
+  isNot?: Prisma.EmployeeWhereInput
 }
 
 export type EmployeeCreateNestedManyWithoutUserInput = {
@@ -498,14 +510,29 @@ export type EnumStatusFieldUpdateOperationsInput = {
   set?: $Enums.Status
 }
 
+export type EmployeeCreateNestedOneWithoutWashedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutWashedInput, Prisma.EmployeeUncheckedCreateWithoutWashedInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutWashedInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+}
+
+export type EmployeeUpdateOneRequiredWithoutWashedNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutWashedInput, Prisma.EmployeeUncheckedCreateWithoutWashedInput>
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutWashedInput
+  upsert?: Prisma.EmployeeUpsertWithoutWashedInput
+  connect?: Prisma.EmployeeWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutWashedInput, Prisma.EmployeeUpdateWithoutWashedInput>, Prisma.EmployeeUncheckedUpdateWithoutWashedInput>
+}
+
 export type EmployeeCreateWithoutUserInput = {
   name: string
   email?: string | null
   phone?: string | null
   entry_time: Date | string
   departure_time: Date | string
-  createdAt?: Date | string
+  created_at?: Date | string
   status?: $Enums.Status
+  washed?: Prisma.WashingCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeUncheckedCreateWithoutUserInput = {
@@ -515,8 +542,9 @@ export type EmployeeUncheckedCreateWithoutUserInput = {
   phone?: string | null
   entry_time: Date | string
   departure_time: Date | string
-  createdAt?: Date | string
+  created_at?: Date | string
   status?: $Enums.Status
+  washed?: Prisma.WashingUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
 export type EmployeeCreateOrConnectWithoutUserInput = {
@@ -555,9 +583,71 @@ export type EmployeeScalarWhereInput = {
   phone?: Prisma.StringNullableFilter<"Employee"> | string | null
   entry_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
   departure_time?: Prisma.DateTimeFilter<"Employee"> | Date | string
-  createdAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
+  created_at?: Prisma.DateTimeFilter<"Employee"> | Date | string
   status?: Prisma.EnumStatusFilter<"Employee"> | $Enums.Status
   user_id?: Prisma.IntFilter<"Employee"> | number
+}
+
+export type EmployeeCreateWithoutWashedInput = {
+  name: string
+  email?: string | null
+  phone?: string | null
+  entry_time: Date | string
+  departure_time: Date | string
+  created_at?: Date | string
+  status?: $Enums.Status
+  user: Prisma.UserCreateNestedOneWithoutEmployeesInput
+}
+
+export type EmployeeUncheckedCreateWithoutWashedInput = {
+  id?: number
+  name: string
+  email?: string | null
+  phone?: string | null
+  entry_time: Date | string
+  departure_time: Date | string
+  created_at?: Date | string
+  status?: $Enums.Status
+  user_id: number
+}
+
+export type EmployeeCreateOrConnectWithoutWashedInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutWashedInput, Prisma.EmployeeUncheckedCreateWithoutWashedInput>
+}
+
+export type EmployeeUpsertWithoutWashedInput = {
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutWashedInput, Prisma.EmployeeUncheckedUpdateWithoutWashedInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutWashedInput, Prisma.EmployeeUncheckedCreateWithoutWashedInput>
+  where?: Prisma.EmployeeWhereInput
+}
+
+export type EmployeeUpdateToOneWithWhereWithoutWashedInput = {
+  where?: Prisma.EmployeeWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutWashedInput, Prisma.EmployeeUncheckedUpdateWithoutWashedInput>
+}
+
+export type EmployeeUpdateWithoutWashedInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  user?: Prisma.UserUpdateOneRequiredWithoutEmployeesNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutWashedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type EmployeeCreateManyUserInput = {
@@ -567,7 +657,7 @@ export type EmployeeCreateManyUserInput = {
   phone?: string | null
   entry_time: Date | string
   departure_time: Date | string
-  createdAt?: Date | string
+  created_at?: Date | string
   status?: $Enums.Status
 }
 
@@ -577,8 +667,9 @@ export type EmployeeUpdateWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  washed?: Prisma.WashingUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutUserInput = {
@@ -588,8 +679,9 @@ export type EmployeeUncheckedUpdateWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
+  washed?: Prisma.WashingUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
 export type EmployeeUncheckedUpdateManyWithoutUserInput = {
@@ -599,10 +691,39 @@ export type EmployeeUncheckedUpdateManyWithoutUserInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   entry_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   departure_time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
 }
 
+
+/**
+ * Count Type EmployeeCountOutputType
+ */
+
+export type EmployeeCountOutputType = {
+  washed: number
+}
+
+export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  washed?: boolean | EmployeeCountOutputTypeCountWashedArgs
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmployeeCountOutputType
+   */
+  select?: Prisma.EmployeeCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
+export type EmployeeCountOutputTypeCountWashedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WashingWhereInput
+}
 
 
 export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -612,10 +733,12 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   phone?: boolean
   entry_time?: boolean
   departure_time?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   status?: boolean
   user_id?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  washed?: boolean | Prisma.Employee$washedArgs<ExtArgs>
+  _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
 
 export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -625,7 +748,7 @@ export type EmployeeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   phone?: boolean
   entry_time?: boolean
   departure_time?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   status?: boolean
   user_id?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -638,7 +761,7 @@ export type EmployeeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   phone?: boolean
   entry_time?: boolean
   departure_time?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   status?: boolean
   user_id?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -651,14 +774,16 @@ export type EmployeeSelectScalar = {
   phone?: boolean
   entry_time?: boolean
   departure_time?: boolean
-  createdAt?: boolean
+  created_at?: boolean
   status?: boolean
   user_id?: boolean
 }
 
-export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "entry_time" | "departure_time" | "createdAt" | "status" | "user_id", ExtArgs["result"]["employee"]>
+export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "entry_time" | "departure_time" | "created_at" | "status" | "user_id", ExtArgs["result"]["employee"]>
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  washed?: boolean | Prisma.Employee$washedArgs<ExtArgs>
+  _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type EmployeeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -671,6 +796,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Employee"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    washed: Prisma.$WashingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -679,7 +805,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     phone: string | null
     entry_time: Date
     departure_time: Date
-    createdAt: Date
+    created_at: Date
     status: $Enums.Status
     user_id: number
   }, ExtArgs["result"]["employee"]>
@@ -1077,6 +1203,7 @@ readonly fields: EmployeeFieldRefs;
 export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  washed<T extends Prisma.Employee$washedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$washedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WashingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1112,7 +1239,7 @@ export interface EmployeeFieldRefs {
   readonly phone: Prisma.FieldRef<"Employee", 'String'>
   readonly entry_time: Prisma.FieldRef<"Employee", 'DateTime'>
   readonly departure_time: Prisma.FieldRef<"Employee", 'DateTime'>
-  readonly createdAt: Prisma.FieldRef<"Employee", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"Employee", 'DateTime'>
   readonly status: Prisma.FieldRef<"Employee", 'Status'>
   readonly user_id: Prisma.FieldRef<"Employee", 'Int'>
 }
@@ -1513,6 +1640,30 @@ export type EmployeeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Employees to delete.
    */
   limit?: number
+}
+
+/**
+ * Employee.washed
+ */
+export type Employee$washedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Washing
+   */
+  select?: Prisma.WashingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Washing
+   */
+  omit?: Prisma.WashingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WashingInclude<ExtArgs> | null
+  where?: Prisma.WashingWhereInput
+  orderBy?: Prisma.WashingOrderByWithRelationInput | Prisma.WashingOrderByWithRelationInput[]
+  cursor?: Prisma.WashingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WashingScalarFieldEnum | Prisma.WashingScalarFieldEnum[]
 }
 
 /**

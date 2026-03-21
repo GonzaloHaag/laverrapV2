@@ -9,7 +9,7 @@ export const clientModel = {
         status: "ACTIVE"
       },
       orderBy: {
-        createdAt: "desc"
+        created_at: "desc"
       }
     });
     return clients;

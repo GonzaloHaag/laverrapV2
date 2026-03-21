@@ -1,6 +1,6 @@
 import { Columns, DialogClient } from "@/components/clients";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { clientService } from "@/services/client-service";
+import { clientService } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
 export const ClientsPage = () => {
@@ -22,13 +22,6 @@ export const ClientsPage = () => {
           </CardAction>
         </CardHeader>
         <CardContent>
-          {/* <DataTable
-            isLoading={query.isLoading}
-            columns={Columns}
-            data={query.data ?? []}
-            searchPlaceholder="Buscar por nombre..."
-            searchFilter="name"
-          /> */}
           <DataTable
             isLoading={query.isLoading}
             columns={Columns}

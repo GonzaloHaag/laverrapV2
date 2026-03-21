@@ -21,6 +21,7 @@ const isoToTimeString = (iso?: string | null) => {
 
 
 export const FormEmployee = ({ employee, closeDialog }: Props) => {
+  const { mutationCreate, mutationUpdate } = useEmployeeMutations();
   const { register, handleSubmit, formState:{ errors, isSubmitting }} = useForm({
     resolver: zodResolver(employeeSchema),
     mode: "onSubmit",
@@ -33,7 +34,6 @@ export const FormEmployee = ({ employee, closeDialog }: Props) => {
       departure_time: isoToTimeString(employee?.departure_time),
     }
   });
-  const { mutationCreate, mutationUpdate } = useEmployeeMutations();
   const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
 
   const onSubmit = handleSubmit(async(data) => {

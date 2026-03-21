@@ -54,7 +54,8 @@ export const ModelName = {
   User: 'User',
   Employee: 'Employee',
   Client: 'Client',
-  Service: 'Service'
+  Service: 'Service',
+  Washing: 'Washing'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -78,7 +79,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   password: 'password',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   role: 'role'
 } as const
 
@@ -92,7 +93,7 @@ export const EmployeeScalarFieldEnum = {
   phone: 'phone',
   entry_time: 'entry_time',
   departure_time: 'departure_time',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   status: 'status',
   user_id: 'user_id'
 } as const
@@ -105,7 +106,7 @@ export const ClientScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   car_type: 'car_type',
   car_model: 'car_model',
   car_plate: 'car_plate',
@@ -121,13 +122,28 @@ export const ServiceScalarFieldEnum = {
   name: 'name',
   description: 'description',
   price: 'price',
-  createdAt: 'createdAt',
+  created_at: 'created_at',
   category: 'category',
   duration: 'duration',
   user_id: 'user_id'
 } as const
 
 export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const WashingScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  user_id: 'user_id',
+  employee_id: 'employee_id',
+  client_id: 'client_id',
+  service_id: 'service_id',
+  status: 'status',
+  should_notify: 'should_notify',
+  notified_at: 'notified_at'
+} as const
+
+export type WashingScalarFieldEnum = (typeof WashingScalarFieldEnum)[keyof typeof WashingScalarFieldEnum]
 
 
 export const SortOrder = {

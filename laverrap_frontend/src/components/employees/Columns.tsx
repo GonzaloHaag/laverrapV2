@@ -21,18 +21,18 @@ export const Columns: ColumnDef<Employee>[] = [
   {
     accessorKey: "entry_time",
     header: "Hora de entrada",
-    cell: ({ row }) => formatTime(row.original.entry_time)
+    cell: ({ row }) => formatTime(row.getValue("entry_time"))
   },
   {
     accessorKey: "departure_time",
     header: "Hora de salida",
-    cell: ({ row }) => formatTime(row.original.departure_time)
+    cell: ({ row }) => formatTime(row.getValue("departure_time"))
   },
   {
     accessorKey: "status",
     header: "Estado",
     cell: ({ row }) => {
-      const status = row.original.status;
+      const status = row.getValue("status");
       return (
         <Badge variant={status === "ACTIVE" ? "default" : "destructive"}>
           {status === "ACTIVE" ? "Activo" : "Inactivo"}
