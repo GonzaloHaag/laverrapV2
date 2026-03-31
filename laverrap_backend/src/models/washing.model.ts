@@ -11,6 +11,28 @@ export const washingModel = {
       },
       orderBy: {
         created_at: "desc"
+      },
+      include: {
+        client: {
+          select: {
+            name: true,
+            email: true,
+            phone: true,
+            car_model: true,
+            car_plate: true
+          }
+        },
+        employee: {
+          select: {
+            name: true
+          }
+        },
+        service: {
+          select: {
+            name: true,
+            price: true,
+          }
+        }
       }
     });
     return washed;
