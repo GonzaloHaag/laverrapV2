@@ -15,3 +15,4 @@ export * from "./Separator";
 export * from "./Sonner";
 export * from "./Table";
 export * from "./Textarea";
+export * from "./Tooltip";

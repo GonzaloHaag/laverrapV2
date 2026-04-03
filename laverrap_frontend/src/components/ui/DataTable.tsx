@@ -24,6 +24,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[],
   isLoading:boolean;
+  isError: boolean;
   searchFilter: string;
   searchPlaceholder?: string;
 }
@@ -33,7 +34,8 @@ export function DataTable<TData, TValue>({
   data,
   isLoading,
   searchFilter,
-  searchPlaceholder = "Buscar..."
+  searchPlaceholder = "Buscar...",
+  isError,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -57,6 +59,14 @@ export function DataTable<TData, TValue>({
     return (
       <span className="text-start text-gray-500">
          Cargando datos...
+      </span>
+    );
+  }
+
+  if(isError) {
+    return (
+      <span className="text-start text-red-500">
+        Ocurrió un error al cargar los datos.
       </span>
     );
   }

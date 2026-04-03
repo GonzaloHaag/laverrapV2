@@ -52,3 +52,15 @@ export const TYPES_OF_VEHICLES = [
   { id: 3, value: "MOTORCYCLE", label: "Moto" },
   { id: 4, value: "OTHER", label: "Otro" },
 ];
+
+export const YES_NO_OPTIONS = [
+  { id: 1, value: "true", label: "Sí" },
+  { id: 2, value: "false", label: "No" },
+];
+
+export const WASHING_STATUS_OPTIONS = [
+  { id: 1, value: "PENDING", label: "Pendiente" },
+  { id: 2, value: "IN_PROGRESS", label: "En Progreso" },
+  { id: 3, value: "COMPLETED", label: "Completado" },
+  { id: 4, value: "CANCELED", label: "Cancelado" },
+];

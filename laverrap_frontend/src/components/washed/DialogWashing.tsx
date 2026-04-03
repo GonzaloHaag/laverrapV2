@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { PencilIcon, PlusCircleIcon } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui";
-import { FormService } from "./FormService";
-import type { Service } from "@/types";
+import type { Washing } from "@/types";
+import { FormWashing } from "./FormWashing";
+
 interface Props {
-  service: Service | null;
+  washing: Washing | null;
 }
-export const DialogService = ({ service }: Props) => {
+export const DialogWashing = ({ washing }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const closeDialog = () => {
@@ -15,14 +16,14 @@ export const DialogService = ({ service }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={
-        <Button type="button" variant={service ? "outline" : "default"} title="Agregar servicio" size={service ? "icon" : "lg"}>
+        <Button type="button" variant={washing ? "outline" : "default"} title="Agregar lavado" size={washing ? "icon" : "lg"}>
           {
-            service ? 
+            washing ? 
               <PencilIcon className="text-green-500" /> 
               : (
                 <>
                   <PlusCircleIcon />
-                  Agregar servicio 
+                  Agregar lavado 
                 </>
               )
           }
@@ -31,12 +32,12 @@ export const DialogService = ({ service }: Props) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Agregar servicio</DialogTitle>
+          <DialogTitle>Agregar lavado</DialogTitle>
           <DialogDescription>
-            Completa el formulario para agregar un nuevo servicio a tu sistema de lavado de autos.
+            Completa el formulario para agregar un nuevo lavado a tu sistema de lavado de autos.
           </DialogDescription>
         </DialogHeader>
-        <FormService service={service} closeDialog={closeDialog} />
+        <FormWashing washing={washing} closeDialog={closeDialog} />
       </DialogContent>
     </Dialog>
   );

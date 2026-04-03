@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { PencilIcon, PlusCircleIcon } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui";
 import type { Client } from "@/types";
-import { useState } from "react";
 import { FormClient } from "./FormClient";
 
 interface Props {

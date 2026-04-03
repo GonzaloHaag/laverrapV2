@@ -2,8 +2,8 @@
 import { employeeService } from "@/services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const useEmployeeMutations = () => {
-  const invalidateEmployees = () => queryClient.invalidateQueries({ queryKey: ["employees"] });
   const queryClient = useQueryClient();
+  const invalidateEmployees = () => queryClient.invalidateQueries({ queryKey: ["employees"] });
   const mutationCreate = useMutation({
     mutationFn: employeeService.create,
     onSuccess: invalidateEmployees

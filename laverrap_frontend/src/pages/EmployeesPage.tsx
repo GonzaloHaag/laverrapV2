@@ -1,14 +1,9 @@
 import { Columns, DialogEmployee } from "@/components/employees";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { employeeService } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useEmployees } from "@/hooks";
 
 export const EmployeesPage = () => {
-  const query = useQuery({
-    queryKey: ["employees"],
-    queryFn: employeeService.getAll,
-    retry: false,
-  });
+  const { isFetching, isError, data } = useEmployees();
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -23,11 +18,12 @@ export const EmployeesPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={query.isLoading}
+            isLoading={isFetching}
             columns={Columns}
-            data={query.data ?? []}
+            data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
             searchFilter="name"
+            isError={isError}
           />
         </CardContent>
       </Card>

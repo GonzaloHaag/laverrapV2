@@ -12,9 +12,14 @@ export const washingModel = {
       orderBy: {
         created_at: "desc"
       },
-      include: {
+      select: {
+        id: true,
+        status: true,
+        should_notify: true,
+        created_at: true,
         client: {
           select: {
+            id: true,
             name: true,
             email: true,
             phone: true,
@@ -24,16 +29,18 @@ export const washingModel = {
         },
         employee: {
           select: {
+            id: true,
             name: true
           }
         },
         service: {
           select: {
+            id: true,
             name: true,
             price: true,
           }
         }
-      }
+      },
     });
     return washed;
   },

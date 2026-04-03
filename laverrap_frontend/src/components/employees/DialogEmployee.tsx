@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { PencilIcon, PlusCircleIcon } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../ui";
 import type { Employee } from "@/types";
 import { FormEmployee } from "./FormEmployee";
-import { useState } from "react";
 
 interface Props {
   employee: Employee | null

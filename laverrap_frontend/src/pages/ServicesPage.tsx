@@ -8,15 +8,10 @@ import {
   CardTitle,
   DataTable,
 } from "@/components/ui";
-import { serviceService } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useServices } from "@/hooks";
 
 export const ServicesPage = () => {
-  const query = useQuery({
-    queryKey: ["services"],
-    queryFn: serviceService.getAll,
-    retry: false,
-  });
+  const { isFetching, isError, data } = useServices();
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -31,11 +26,12 @@ export const ServicesPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={query.isLoading}
+            isLoading={isFetching}
             columns={Columns}
-            data={query.data ?? []}
+            data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
             searchFilter="name"
+            isError={isError}
           />
         </CardContent>
       </Card>

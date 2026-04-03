@@ -1,14 +1,9 @@
 import { Columns, DialogClient } from "@/components/clients";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { clientService } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useClients } from "@/hooks";
 
 export const ClientsPage = () => {
-  const query = useQuery({
-    queryKey: ["clients"],
-    queryFn: clientService.getAll,
-    retry: false,
-  });
+  const { isFetching, data, isError } = useClients();
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -23,11 +18,12 @@ export const ClientsPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={query.isLoading}
+            isLoading={isFetching}
             columns={Columns}
-            data={query.data ?? []}
+            data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
             searchFilter="name"
+            isError={isError}
           />
         </CardContent>
       </Card>

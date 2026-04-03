@@ -8,7 +8,7 @@ interface SelectFormProps extends SelectHTMLAttributes<HTMLSelectElement> {
   labelFor?: string;
   error?: string;
   placeholder?: string;
-  options: { id: number; label: string; value: string | number }[];
+  options: { id: number; label: string; value: string | number}[];
 }
 
 export const SelectForm = forwardRef<HTMLSelectElement, SelectFormProps>(

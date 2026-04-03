@@ -1,14 +1,9 @@
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { Columns } from "@/components/washed";
-import { washingService } from "@/services/washing-service";
-import { useQuery } from "@tanstack/react-query";
+import { Columns, DialogWashing } from "@/components/washed";
+import { useWashed } from "@/hooks";
 
 export const WashedPage = () => {
-  const query = useQuery({
-    queryKey: ["services"],
-    queryFn: washingService.getAll,
-    retry: false,
-  });
+  const { isFetching, isError, data } = useWashed();
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -18,16 +13,17 @@ export const WashedPage = () => {
             Administra los empleados de tu lavadero
           </CardDescription>
           <CardAction>
-            {/* <DialogEmployee employee={null} /> */}
+            <DialogWashing washing={null} />
           </CardAction>
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={query.isLoading}
+            isLoading={isFetching}
             columns={Columns}
-            data={query.data ?? []}
+            data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
-            searchFilter="name"
+            searchFilter="id"
+            isError={isError}
           />
         </CardContent>
       </Card>
