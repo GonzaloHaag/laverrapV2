@@ -71,6 +71,14 @@ export const washingModel = {
       where: { 
         id: washingId,
         user_id: userId
+      },
+      include: {
+        client: {
+          select: {
+            id: true,
+            email: true,
+          }
+        }
       }
     });
     return washing;

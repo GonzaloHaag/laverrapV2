@@ -3,7 +3,9 @@ export const config = {
   SALT_ROUNDS: 10,
   API_BASE_URL: "/api/v1",
   JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
-  DATABASE_URL: process.env.DATABASE_URL
+  DATABASE_URL: process.env.DATABASE_URL,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 };
 if (!config.JWT_SECRET_KEY) {
   console.warn("JWT_SECRET_KEY no está definido en las variables de entorno");

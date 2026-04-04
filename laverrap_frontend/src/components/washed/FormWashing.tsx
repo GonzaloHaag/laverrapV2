@@ -97,6 +97,7 @@ export const FormWashing = ({ washing, closeDialog }: Props) => {
       <div className="col-span-2 w-full flex flex-col gap-2">
         <span className="text-sm text-muted-foreground">Precio total del lavado: {formatCurrency(servicePrice)}</span>
         <span className="text-sm text-muted-foreground">Vehículo: { client ? `${client.car_model} - ${client.car_plate}` : "Cliente no seleccionado" }</span>
+        <span className="text-sm text-muted-foreground">Email cliente: { client ? client.email : "Cliente no seleccionado" }</span>
       </div>
       <FormDialogFooter isSubmitting={isSubmitting} />
     </form>
