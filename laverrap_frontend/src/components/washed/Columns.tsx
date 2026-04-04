@@ -72,8 +72,8 @@ export const Columns:ColumnDef<Washing>[] = [
     accessorKey: "notified_at",
     header: "Email enviado",
     cell: ({ row }) => {
-      const notifiedAt = row.getValue("notified_at");
-      return notifiedAt ? notifiedAt.toLocaleString() : "No enviado";
+      const notifiedAt = row.getValue("notified_at") as string | null;
+      return notifiedAt ? new Date(notifiedAt).toLocaleString() : "No enviado";
     }
   },
   {
