@@ -12,7 +12,7 @@ export const washingService = {
     return data.data;
   },
   updateStatus: async ({ id, status } : { id: Washing["id"], status: Washing["status" ]}): Promise<Washing> => {
-    const { data } = await api.put<ServiceResponse<Washing>>(`${WASHED_URL}/${id}`, { status });
+    const { data } = await api.patch<ServiceResponse<Washing>>(`${WASHED_URL}/${id}`, { status });
     return data.data;
   },
 

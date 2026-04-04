@@ -7,5 +7,5 @@ export const washingRoutes = Router();
 
 washingRoutes.get("/", catchedAsync(washingController.getAll));
 washingRoutes.post("/", catchedAsync(washingController.create));
-washingRoutes.put("/:id", catchedAsync(washingController.updateStatus));
+washingRoutes.patch("/:id", catchedAsync(washingController.updateStatus));
 washingRoutes.delete("/:id", catchedAsync(washingController.delete));

@@ -5,24 +5,17 @@ export const nodemailerService = {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        type: "OAuth2",
-        clientId: config.GOOGLE_CLIENT_ID,
-        clientSecret: config.GOOGLE_CLIENT_SECRET,
+        user: "gonzalohaag1311@gmail.com",
+        pass: config.GOOGLE_APP_PASSWORD
       }
     });
-    try {
-      await transporter.verify();
-      console.log("Nodemailer transporter is ready to send emails");
-    } catch (error) {
-      console.error("Error verifying Nodemailer transporter:", error);
-    }
     try {
       const info = await transporter.sendMail({
         from: "gonzalohaag1311@gmail.com",
         to: to,
-        subject: "Test Email from Nodemailer",
-        text: "This is a test email sent using Nodemailer with OAuth2 authentication.",
-        html: "<p>This is a test email sent using <b>Nodemailer</b> with OAuth2 authentication.</p>",
+        subject: "Lavado finalizado!",
+        text: "Su lavado ha sido finalizado. Puedes pasar a retirar el vehículo cuando quieras.",
+        html: "<p>Su lavado ha sido finalizado.</p>",
       });   
       console.log("Email enviado", info.messageId);
     }

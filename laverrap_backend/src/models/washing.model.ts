@@ -17,6 +17,7 @@ export const washingModel = {
         status: true,
         should_notify: true,
         created_at: true,
+        notified_at: true,
         client: {
           select: {
             id: true,
@@ -60,6 +61,14 @@ export const washingModel = {
       where: {
         id: washingId,
       },
+      include: {
+        client: {
+          select: {
+            id: true, 
+            email: true
+          }
+        }
+      },
       data: {
         status: status
       }
@@ -90,5 +99,17 @@ export const washingModel = {
       }
     });
     return deletedWashing;
+  },
+
+  async markEmailAsSent({ washingId } : { washingId: number }) {
+    const updatedWashing = await prisma.washing.update({
+      where: {
+        id: washingId,
+      },
+      data: {
+        notified_at: new Date()
+      }
+    });
+    return updatedWashing;
   }
 };

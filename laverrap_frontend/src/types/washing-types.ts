@@ -3,6 +3,7 @@ export interface Washing {
     status: "PENDING" | "IN_PROGRESS" | "COMPLETED" | "CANCELED";
     should_notify: boolean;
     created_at: string;
+    notified_at: string | null;
     client: {
         id: number;
         name: string;

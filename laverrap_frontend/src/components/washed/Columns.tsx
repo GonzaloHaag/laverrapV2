@@ -69,8 +69,12 @@ export const Columns:ColumnDef<Washing>[] = [
     }
   },
   {
-    id: "status_email",
+    accessorKey: "notified_at",
     header: "Email enviado",
+    cell: ({ row }) => {
+      const notifiedAt = row.getValue("notified_at");
+      return notifiedAt ? notifiedAt.toLocaleString() : "No enviado";
+    }
   },
   {
     id: "actions",

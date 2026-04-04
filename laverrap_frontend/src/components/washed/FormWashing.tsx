@@ -59,8 +59,8 @@ export const FormWashing = ({ washing, closeDialog }: Props) => {
 
   const servicePrice = servicesData?.find((service) => service.id === serviceSelected)?.price ?? 0;
   const client = clientsData?.find((client) => client.id === clientSelected);
-  const onSubmit = handleSubmit((data) => {
-    mutationCreate.mutate({ payload: data });
+  const onSubmit = handleSubmit(async (data) => {
+    await mutationCreate.mutateAsync({ payload: data });
     toast.success("Lavado creado exitosamente");
     closeDialog();
   });
