@@ -18,6 +18,8 @@ export const clientService = {
   async update({ userId, clientId, data } : { userId:number, clientId: number, data: Client }) {
     const findClient = await clientModel.getById({ userId, clientId });
     if (!findClient) throw new ClientError("Cliente no encontrado", 404);
+    const exitingClient = await clientModel.getByEmail({ userId, email: data.email });
+    if (exitingClient && exitingClient.id !== clientId) throw new ClientError("Ya existe un cliente con ese email", 400);
     const updatedClient = await clientModel.update({ clientId, data });
     return updatedClient;
   },

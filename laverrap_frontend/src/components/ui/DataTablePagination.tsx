@@ -1,6 +1,6 @@
 import type { Table } from "@tanstack/react-table";
 import { NativeSelect, NativeSelectOption } from "./NativeSelect";
-import { Button } from "./Button";
+import { Button } from "./Button/Button";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from "lucide-react";
 
 export const DataTablePagination = <TData,>({ table } : { table: Table<TData> })=> {

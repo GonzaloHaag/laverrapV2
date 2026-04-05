@@ -4,9 +4,9 @@ import { BubblesIcon } from "lucide-react";
 import { Navbar } from "./Navbar";
 import { ButtonLogout } from "./ButtonLogout";
 
-export const Header = () => {
+export const HeaderDesktop = () => {
   return (
-    <header className="w-full flex items-center min-h-20 bg-muted">
+    <header className="w-full items-center min-h-20 bg-muted hidden lg:flex">
       <div className="container max-w-7xl w-full mx-auto flex items-center justify-between p-4">
         <Link to={PRIVATE_ROUTES.DASHBOARD.path} title="Laverrap" className="flex items-center gap-x-2 grow basis-0">
           <BubblesIcon size={40} className="text-blue-500" />

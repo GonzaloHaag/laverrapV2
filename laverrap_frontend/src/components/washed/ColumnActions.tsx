@@ -1,15 +1,21 @@
 import type { Washing } from "@/types";
 import { AlertDialogConfirm } from "../shared";
-import { useWashingMutations } from "@/hooks";
 import { Button, Tooltip, TooltipContent, TooltipTrigger } from "../ui";
 import { BanIcon, CheckCircleIcon, PlayIcon } from "lucide-react";
 import { toast } from "sonner";
+import type { UseMutationResult } from "@tanstack/react-query";
 
 interface Props {
     washing: Washing;
+    mutationDelete: UseMutationResult<null, Error, {
+    id: Washing["id"];
+}, unknown>;
+    mutationUpdateStatus: UseMutationResult<Washing, Error, {
+    id: Washing["id"];
+    status: Washing["status"];
+}, unknown>;
 }
-export const ColumnActions = ({ washing } : Props ) => {
-  const { mutationDelete, mutationUpdateStatus } = useWashingMutations();
+export const ColumnActions = ({ washing, mutationDelete, mutationUpdateStatus } : Props ) => {
   const handleAction = async (status: Washing["status"]) => {
     if(washing.status === "COMPLETED") {
       toast.error("No se puede actualizar el estado de un lavado completado.");

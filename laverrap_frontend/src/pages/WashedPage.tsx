@@ -1,9 +1,12 @@
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { Columns, DialogWashing } from "@/components/washed";
-import { useWashed } from "@/hooks";
+import { createColumns, DialogWashing } from "@/components/washed";
+import { useWashed, useWashingMutations } from "@/hooks";
+import { useMemo } from "react";
 
 export const WashedPage = () => {
-  const { isFetching, isError, data } = useWashed();
+  const { isLoading, isError, data } = useWashed();
+  const { mutationDelete, mutationUpdateStatus } = useWashingMutations();
+  const columns = useMemo(() => createColumns({ mutationDelete, mutationUpdateStatus }), [ mutationDelete, mutationUpdateStatus ]);
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -18,12 +21,13 @@ export const WashedPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={isFetching}
-            columns={Columns}
+            isLoading={isLoading}
+            columns={columns}
             data={data ?? []}
-            searchPlaceholder="Buscar por nombre..."
-            searchFilter="id"
+            searchPlaceholder="Buscar por cliente..."
+            searchFilter="client_name"
             isError={isError}
+            filterByStatus={true}
           />
         </CardContent>
       </Card>

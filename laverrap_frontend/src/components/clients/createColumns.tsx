@@ -3,8 +3,14 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { Link } from "react-router";
 import { Badge } from "../ui";
 import { ColumnActions } from "./ColumnActions";
+import type { UseMutationResult } from "@tanstack/react-query";
+interface Props {
+ mutationDeactivate: UseMutationResult<null, Error, {
+    id: Client["id"];
+}, unknown>
+}
 
-export const Columns: ColumnDef<Client>[] = [
+export const createColumns = ({ mutationDeactivate } : Props): ColumnDef<Client>[] => [
   {
     accessorKey: "name",
     header: "Nombre",
@@ -15,7 +21,7 @@ export const Columns: ColumnDef<Client>[] = [
     cell: ({ row }) => {
       const client = row.original;
       return (
-        <div>
+        <div className="flex flex-col">
           <Link to={`mailto:${client.email}`} target="_blank" rel="noopener noreferrer" title="Enviar correo" className="text-blue-500 hover:underline">{client.email}</Link>
           <Link to={`tel:${client.phone}`} title="Llamar" className="text-blue-500 hover:underline">{client.phone}</Link>
         </div>
@@ -47,11 +53,11 @@ export const Columns: ColumnDef<Client>[] = [
           {status === "ACTIVE" ? "Activo" : "Inactivo"}
         </Badge>
       );
-    }
+    },
+    filterFn: "equals",
   },
   {
     id: "actions",
-    cell: ({ row }) => <ColumnActions client={row.original} />
+    cell: ({ row }) => <ColumnActions client={row.original} mutationDeactivate={mutationDeactivate} />
   }
-
 ];

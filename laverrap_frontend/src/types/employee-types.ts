@@ -7,4 +7,7 @@ export interface Employee {
     departure_time: string;
     createdAt:     string;
     status:        "ACTIVE" | "INACTIVE";
+    _count: {
+        washed: number;
+    };
 }

@@ -1,4 +1,4 @@
-import { CardChartIncome, CardChartWashed, CardRecentWashed, CardTopEmployees, SectionCards } from "@/components/dashboard";
+import { CardChartIncome, CardChartWashed, SectionCards } from "@/components/dashboard";
 
 export const DashboardPage = () => {
   return (
@@ -13,10 +13,6 @@ export const DashboardPage = () => {
       <div className="grid md:grid-cols-2 gap-4">
         <CardChartIncome />
         <CardChartWashed />
-      </div>
-      <div className="grid md:grid-cols-2 gap-4">
-        <CardRecentWashed />
-        <CardTopEmployees />
       </div>
     </section>
   );

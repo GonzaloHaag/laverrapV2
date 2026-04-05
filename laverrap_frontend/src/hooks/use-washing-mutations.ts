@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const useWashingMutations = () => {
   const queryClient = useQueryClient();
   const invalidateWashed = () => queryClient.invalidateQueries({ queryKey: ["washed"] });
+  const invalidateEmployees = () => queryClient.invalidateQueries({ queryKey: ["employees"] });
   const mutationCreate = useMutation({
     mutationFn: washingService.create,
     onSuccess: invalidateWashed
@@ -12,7 +13,12 @@ export const useWashingMutations = () => {
 
   const mutationUpdateStatus = useMutation({
     mutationFn: washingService.updateStatus,
-    onSuccess: invalidateWashed
+    onSuccess: (data) => {
+      invalidateWashed();
+      if(data.status === "COMPLETED") {
+        invalidateEmployees();
+      }
+    }
   });
 
   const mutationDelete = useMutation({

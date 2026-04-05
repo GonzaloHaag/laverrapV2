@@ -18,7 +18,6 @@ export const axiosInterceptor = () => {
   // Agregar un interceptor a la petición
   api.interceptors.request.use(function (request) {
   // Haz algo antes que la petición se ha enviada
-    console.log("INTERCEPTOR DE PETICIÓN", request);
     return updateHeader(request);
   }, function (error) {
   // Haz algo con el error de la petición
@@ -34,9 +33,8 @@ export const axiosInterceptor = () => {
   // Cualquier código de estado que este fuera del rango de 2xx causa la ejecución de esta función
   // Haz algo con el error
     const status = error.response?.status;
-    console.log("ERROR CAPTURADO EN EL INTERCEPTOR", error.response);
     if(status === 401 || status === 403) {
-      toast.error("No tienes permisos para realizar esta acción");
+      toast.error("Iniciá sesión nuevamente para continuar");
       return Promise.reject(new Error("Credenciales inválidas"));
     }
     if(status === 500) {

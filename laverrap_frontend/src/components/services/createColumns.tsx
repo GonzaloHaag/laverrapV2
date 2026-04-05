@@ -1,18 +1,16 @@
 import type { Service, ServiceCategory } from "@/types";
-import { formatCurrency } from "@/utils/formatters";
-import { type ColumnDef } from "@tanstack/react-table";
+import { formatCurrency, formatServiceCategory } from "@/utils/formatters";
 import { ColumnActions } from "./ColumnActions";
 import { Badge } from "../ui";
+import type { UseMutationResult } from "@tanstack/react-query";
+import type { ColumnDef } from "@tanstack/react-table";
+interface Props {
+    mutationDelete: UseMutationResult<null, Error, {
+    id: Service["id"];
+}, unknown>
+}
 
-
-const formatCategory: Record<ServiceCategory, "Básico" | "Completo" | "Premium" | "Otra"> = {
-  BASIC: "Básico",
-  COMPLETE: "Completo",
-  PREMIUM: "Premium",
-  OTHER: "Otra"
-};
-
-export const Columns: ColumnDef<Service>[] = [
+export const createColumns = ({ mutationDelete } : Props): ColumnDef<Service>[] => [
   {
     accessorKey: "name",
     header: "Nombre",
@@ -43,14 +41,14 @@ export const Columns: ColumnDef<Service>[] = [
     cell: ({ row }) => {
       const category: ServiceCategory = row.getValue("category");
       return (
-        <Badge variant={"outline"} title={formatCategory[category]}>
-          {formatCategory[category]}
+        <Badge variant={category === "COMPLETE" ? "default" : "outline"} title={formatServiceCategory[category]}>
+          {formatServiceCategory[category]}
         </Badge>
       );
     }
   },
   {
     id: "actions",
-    cell: ({ row }) => <ColumnActions service={row.original} />
+    cell: ({ row }) => <ColumnActions service={row.original} mutationDelete={mutationDelete} />
   }
 ];

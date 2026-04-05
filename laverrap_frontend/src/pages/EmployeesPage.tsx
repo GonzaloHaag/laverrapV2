@@ -1,9 +1,12 @@
-import { Columns, DialogEmployee } from "@/components/employees";
+import { createColumns, DialogEmployee } from "@/components/employees";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { useEmployees } from "@/hooks";
+import { useEmployeeMutations, useEmployees } from "@/hooks";
+import { useMemo } from "react";
 
 export const EmployeesPage = () => {
-  const { isFetching, isError, data } = useEmployees();
+  const { isLoading, isError, data } = useEmployees();
+  const { mutationDeactivate } = useEmployeeMutations();
+  const columns = useMemo(() => createColumns({ mutationDeactivate }), [mutationDeactivate]);
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -18,8 +21,8 @@ export const EmployeesPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={isFetching}
-            columns={Columns}
+            isLoading={isLoading}
+            columns={columns}
             data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
             searchFilter="name"

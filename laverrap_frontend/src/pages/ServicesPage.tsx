@@ -1,4 +1,5 @@
-import { Columns, DialogService } from "@/components/services";
+import { useMemo } from "react";
+import { createColumns, DialogService } from "@/components/services";
 import {
   Card,
   CardAction,
@@ -8,10 +9,12 @@ import {
   CardTitle,
   DataTable,
 } from "@/components/ui";
-import { useServices } from "@/hooks";
+import { useServiceMutations, useServices } from "@/hooks";
 
 export const ServicesPage = () => {
-  const { isFetching, isError, data } = useServices();
+  const { isLoading, isError, data } = useServices();
+  const { mutationDelete } = useServiceMutations();
+  const columns = useMemo(() => createColumns({ mutationDelete }), [mutationDelete]);
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
@@ -26,8 +29,8 @@ export const ServicesPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={isFetching}
-            columns={Columns}
+            isLoading={isLoading}
+            columns={columns}
             data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
             searchFilter="name"

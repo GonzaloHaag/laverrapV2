@@ -17,8 +17,11 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 import { InputSearch } from "../shared";
-import { useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { DataTablePagination } from "./DataTablePagination";
+import { NativeSelect, NativeSelectOption } from "./NativeSelect";
+import { WASHING_STATUS_OPTIONS } from "@/utils/consts";
+import { useDebounce } from "@/hooks";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -27,6 +30,7 @@ interface DataTableProps<TData, TValue> {
   isError: boolean;
   searchFilter: string;
   searchPlaceholder?: string;
+  filterByStatus?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -36,8 +40,11 @@ export function DataTable<TData, TValue>({
   searchFilter,
   searchPlaceholder = "Buscar...",
   isError,
+  filterByStatus = false,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [searchValue, setSearchValue] = useState<string>("");
+  const debouncedSearch = useDebounce(searchValue);
   const table = useReactTable({
     data,
     columns,
@@ -55,29 +62,39 @@ export function DataTable<TData, TValue>({
     }
   });
 
-  if(isLoading) {
-    return (
-      <span className="text-start text-gray-500">
-         Cargando datos...
-      </span>
-    );
-  }
+  useEffect(() => {
+    table.getColumn(searchFilter)?.setFilterValue(debouncedSearch);
+  },[ debouncedSearch, searchFilter ]);
 
-  if(isError) {
-    return (
-      <span className="text-start text-red-500">
-        Ocurrió un error al cargar los datos.
-      </span>
-    );
-  }
+  const onChangeFilter = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchValue(value);
+  };
 
+  const onChangeFilterStatus = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    table.getColumn("status")?.setFilterValue(value);
+  };
   return (
     <div className="flex flex-col gap-y-4">
-      <InputSearch placeholder={searchPlaceholder}
-        value={(table.getColumn(searchFilter)?.getFilterValue() as string) ?? ""}
-        onChange={(event) =>
-          table.getColumn(searchFilter)?.setFilterValue(event.target.value)
-        } />
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-x-6 gap-y-4">
+        <InputSearch placeholder={searchPlaceholder}
+          value={searchValue}
+          onChange={onChangeFilter} />
+        { filterByStatus && (
+          <NativeSelect
+            value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
+            onChange={onChangeFilterStatus}
+          >
+            <NativeSelectOption value="">Todos los estados</NativeSelectOption>
+            {
+              WASHING_STATUS_OPTIONS.map((option) => (
+                <NativeSelectOption key={option.id} value={option.value}>{option.label}</NativeSelectOption>
+              ))
+            }
+          </NativeSelect>
+        )}
+      </div>
       <div className="overflow-hidden rounded-md border">
         <Table>
           <TableHeader>
@@ -99,26 +116,40 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
-                  ))}
+            {
+              isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                     Cargando datos...
+                  </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+              ) : isError ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center text-red-500">
+                     Ocurrió un error al cargar los datos.
+                  </TableCell>
+                </TableRow>
+              ) : table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
                 No se encontraron resultados.
-                </TableCell>
-              </TableRow>
-            )}
+                  </TableCell>
+                </TableRow>
+              )
+            }
           </TableBody>
         </Table>
       </div>

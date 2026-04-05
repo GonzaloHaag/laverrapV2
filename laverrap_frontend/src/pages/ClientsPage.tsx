@@ -1,14 +1,17 @@
-import { Columns, DialogClient } from "@/components/clients";
+import { useMemo } from "react";
+import { createColumns, DialogClient } from "@/components/clients";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
-import { useClients } from "@/hooks";
+import { useClientMutations, useClients } from "@/hooks";
 
 export const ClientsPage = () => {
-  const { isFetching, data, isError } = useClients();
+  const { isLoading, data, isError } = useClients();
+  const { mutationDeactivate } = useClientMutations();
+  const columns = useMemo(() => createColumns({ mutationDeactivate }), [mutationDeactivate]);
   return (
     <section className="flex flex-col gap-y-4">
       <Card>
         <CardHeader>
-          <CardTitle>Clients</CardTitle>
+          <CardTitle>Clientes</CardTitle>
           <CardDescription>
             Administra los clientes de tu lavadero
           </CardDescription>
@@ -18,8 +21,8 @@ export const ClientsPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            isLoading={isFetching}
-            columns={Columns}
+            isLoading={isLoading}
+            columns={columns}
             data={data ?? []}
             searchPlaceholder="Buscar por nombre..."
             searchFilter="name"

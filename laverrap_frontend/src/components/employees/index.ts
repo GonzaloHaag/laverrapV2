@@ -1,3 +1,3 @@
 export { DialogEmployee } from "./DialogEmployee";
-export { Columns } from "./Columns";
+export { createColumns } from "./createColumns";
 export { FormEmployee } from "./FormEmployee";

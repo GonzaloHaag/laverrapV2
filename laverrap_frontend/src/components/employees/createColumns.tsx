@@ -4,12 +4,15 @@ import type { Employee } from "@/types";
 import { type ColumnDef } from "@tanstack/react-table";
 import { Badge } from "../ui";
 import { ColumnActions } from "./ColumnActions";
-const formatTime = (isoString: string) => {
-  if (!isoString) return "-";
-  const date = new Date(isoString);
-  return new Intl.DateTimeFormat("es-AR", { hour: "2-digit", minute: "2-digit" }).format(date);
-};
-export const Columns: ColumnDef<Employee>[] = [
+import { formatTime } from "@/utils/formatters";
+import type { UseMutationResult } from "@tanstack/react-query";
+interface Props {
+   mutationDeactivate: UseMutationResult<null, Error, {
+    id: Employee["id"];
+}, unknown>
+}
+
+export const createColumns = ({ mutationDeactivate } : Props): ColumnDef<Employee>[] => [
   {
     accessorKey: "name",
     header: "Nombre",
@@ -29,6 +32,10 @@ export const Columns: ColumnDef<Employee>[] = [
     cell: ({ row }) => formatTime(row.getValue("departure_time"))
   },
   {
+    accessorKey: "_count.washed",
+    header: "Lavados completados",
+  },
+  {
     accessorKey: "status",
     header: "Estado",
     cell: ({ row }) => {
@@ -42,6 +49,6 @@ export const Columns: ColumnDef<Employee>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <ColumnActions employee={row.original} />
+    cell: ({ row }) => <ColumnActions employee={row.original} mutationDeactivate={mutationDeactivate} />
   },
 ];

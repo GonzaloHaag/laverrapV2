@@ -8,8 +8,19 @@ export const employeeModel = {
         user_id: userId,
         status: "ACTIVE"
       },
+      include: {
+        _count: {
+          select: {
+            washed: {
+              where: {
+                status: "COMPLETED"
+              }
+            }
+          }
+        }
+      },
       orderBy: {
-        created_at: "desc"
+        created_at: "desc",
       }
     });
     return employees;

@@ -1,2 +1,2 @@
-export { Columns } from "./Columns";
+export { createColumns } from "./createColumns";
 export { DialogService } from "./DialogService";

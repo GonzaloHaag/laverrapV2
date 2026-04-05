@@ -1,14 +1,16 @@
 
 import type { Employee } from "@/types";
 import { AlertDialogConfirm } from "../shared";
-import { useEmployeeMutations } from "@/hooks";
 import { DialogEmployee } from "./DialogEmployee";
+import type { UseMutationResult } from "@tanstack/react-query";
 
 interface Props {
     employee: Employee;
+    mutationDeactivate: UseMutationResult<null, Error, {
+    id: Employee["id"];
+}, unknown>
 }
-export const ColumnActions = ({ employee }: Props) => {
-  const { mutationDeactivate } = useEmployeeMutations();
+export const ColumnActions = ({ employee, mutationDeactivate }: Props) => {
   return (
     <div>
       <AlertDialogConfirm id={employee.id} mutationDelete={mutationDeactivate} />

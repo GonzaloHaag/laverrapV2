@@ -1,12 +1,14 @@
 import type { Service } from "@/types";
 import { AlertDialogConfirm } from "../shared";
 import { DialogService } from "./DialogService";
-import { useServiceMutations } from "@/hooks";
+import type { UseMutationResult } from "@tanstack/react-query";
 interface Props {
     service: Service;
+    mutationDelete: UseMutationResult<null, Error, {
+    id: Service["id"];
+}, unknown>
 }
-export const ColumnActions = ({ service }: Props) => {
-  const { mutationDelete } = useServiceMutations();
+export const ColumnActions = ({ service, mutationDelete }: Props) => {
   return (
     <div>
       <AlertDialogConfirm id={service.id} mutationDelete={mutationDelete} />
