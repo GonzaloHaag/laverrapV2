@@ -7,3 +7,4 @@ export { useEmployees } from "./use-employees";
 export { useServices } from "./use-services";
 export { useWashed } from "./use-washed";
 export { useDebounce } from "./use-debounce";
+export { useStats } from "./use-stats";

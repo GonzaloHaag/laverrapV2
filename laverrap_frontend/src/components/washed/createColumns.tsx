@@ -39,10 +39,10 @@ export const createColumns = ({ mutationDelete, mutationUpdateStatus } : Props )
     header: "Empleado",
   },
   {
-    accessorKey: "service.price",
+    accessorKey: "price",
     header: "Precio",
     cell: ({ row }) => {
-      const price = row.original.service.price;
+      const price = row.getValue("price") as number;
       return formatCurrency(price);
     }
   },

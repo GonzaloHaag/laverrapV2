@@ -20,7 +20,7 @@ export const clientService = {
     if (!findClient) throw new ClientError("Cliente no encontrado", 404);
     const exitingClient = await clientModel.getByEmail({ userId, email: data.email });
     if (exitingClient && exitingClient.id !== clientId) throw new ClientError("Ya existe un cliente con ese email", 400);
-    const updatedClient = await clientModel.update({ clientId, data });
+    const updatedClient = await clientModel.update({ clientId, data, userId });
     return updatedClient;
   },
 
@@ -28,7 +28,7 @@ export const clientService = {
     const findClient = await clientModel.getById({ userId, clientId });
     if (!findClient) throw new ClientError("Cliente no encontrado", 404);
     if (findClient.status === "INACTIVE") throw new ClientError("El cliente ya está inactivo", 400);
-    const updatedClient = await clientModel.deactivate({ clientId });
+    const updatedClient = await clientModel.deactivate({ clientId, userId });
     return updatedClient;
   },
 
@@ -36,7 +36,7 @@ export const clientService = {
     const findClient = await clientModel.getById({ userId, clientId });
     if (!findClient) throw new ClientError("Cliente no encontrado", 404);
     if (findClient.status === "ACTIVE") throw new ClientError("El cliente ya está activo", 400);
-    const updatedClient = await clientModel.activate({ clientId });
+    const updatedClient = await clientModel.activate({ clientId, userId });
     return updatedClient;
   }
 };

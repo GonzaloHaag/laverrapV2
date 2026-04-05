@@ -4,19 +4,31 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const useClientMutations = () => {
   const queryClient = useQueryClient();
   const invalidateClients = () => queryClient.invalidateQueries({ queryKey: ["clients"] });
+  const invalidateStats = () => queryClient.invalidateQueries({ queryKey: ["stats"] });
   const mutationCreate = useMutation({
     mutationFn: clientService.create,
-    onSuccess: invalidateClients
+    onSuccess: (data) => {
+      invalidateClients();
+      if(data.status === "ACTIVE") {
+        invalidateStats();
+      }
+    }
   });
 
   const mutationUpdate = useMutation({
     mutationFn: clientService.update,
-    onSuccess: invalidateClients
+    onSuccess: () => {
+      invalidateClients();
+      invalidateStats();
+    }
   });
 
   const mutationDeactivate = useMutation({
     mutationFn: clientService.deactivate,
-    onSuccess: invalidateClients
+    onSuccess: () => {
+      invalidateClients();
+      invalidateStats();
+    }
   });
 
   return {

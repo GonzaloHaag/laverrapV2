@@ -6,6 +6,7 @@ export const useWashingMutations = () => {
   const queryClient = useQueryClient();
   const invalidateWashed = () => queryClient.invalidateQueries({ queryKey: ["washed"] });
   const invalidateEmployees = () => queryClient.invalidateQueries({ queryKey: ["employees"] });
+  const invalidateStats = () => queryClient.invalidateQueries({ queryKey: ["stats"] });
   const mutationCreate = useMutation({
     mutationFn: washingService.create,
     onSuccess: invalidateWashed
@@ -17,6 +18,7 @@ export const useWashingMutations = () => {
       invalidateWashed();
       if(data.status === "COMPLETED") {
         invalidateEmployees();
+        invalidateStats();
       }
     }
   });

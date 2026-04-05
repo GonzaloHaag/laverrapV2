@@ -1,6 +1,7 @@
 import { prisma } from "../lib/prisma.js";
 import type { Washing } from "../schemas/washing.schema.js";
 import type { WashingStatus } from "../types/washing.types.js";
+import { ClientError } from "../utils/errors.js";
 
 
 export const washingModel = {
@@ -18,6 +19,7 @@ export const washingModel = {
         should_notify: true,
         created_at: true,
         notified_at: true,
+        price: true,
         client: {
           select: {
             id: true,
@@ -38,7 +40,6 @@ export const washingModel = {
           select: {
             id: true,
             name: true,
-            price: true,
           }
         }
       },
@@ -47,13 +48,23 @@ export const washingModel = {
   },
 
   async create({ userId, data } : { userId:number, data: Washing }) {
+    const findService = await prisma.service.findUnique({
+      where: {
+        user_id: userId,
+        id: data.service_id
+      },
+      select: {
+        price: true
+      }
+    });
+    if(!findService) throw new ClientError("Servicio no encontrado", 404);
     const newWashing = await prisma.washing.create({
       data: {
         ...data,
-        user_id: userId
+        user_id: userId,
+        price: findService.price
       }
     });
-
     return newWashing;
   },
   async updateStatus({ washingId, status } : { washingId: number, status: WashingStatus }) {
@@ -92,10 +103,11 @@ export const washingModel = {
     });
     return washing;
   },
-  async delete({ washingId } : { washingId: number }) {
+  async delete({ washingId, userId } : { washingId: number, userId: number }) {
     const deletedWashing = await prisma.washing.delete({
       where: {
-        id: washingId
+        id: washingId,
+        user_id: userId
       }
     });
     return deletedWashing;
@@ -111,5 +123,28 @@ export const washingModel = {
       }
     });
     return updatedWashing;
+  },
+
+  async getTotalIncome({ userId }: { userId: number }) {
+    const totalIncome = await prisma.washing.aggregate({
+      where: {
+        user_id: userId,
+        status: "COMPLETED"
+      },
+      _sum: {
+        price: true
+      }
+    });
+    return totalIncome._sum.price ?? 0;
+  },
+
+  async getTotalWashed({ userId }: { userId: number }) {
+    const totalWashed = await prisma.washing.count({
+      where: {
+        user_id: userId,
+        status: "COMPLETED"
+      }
+    });
+    return totalWashed;
   }
 };

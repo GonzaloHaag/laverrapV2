@@ -82,6 +82,7 @@ model Washing {
   status        WashingStatus @default(PENDING)
   should_notify Boolean       @default(false)
   notified_at   DateTime?
+  price         Decimal       @db.Decimal(10, 2)
 }
 
 enum UserRole {

@@ -4,6 +4,7 @@ export interface Washing {
     should_notify: boolean;
     created_at: string;
     notified_at: string | null;
+    price: number;
     client: {
         id: number;
         name: string;
@@ -19,6 +20,5 @@ export interface Washing {
     service: {
         id: number;
         name: string;
-        price: number;
     };
 }

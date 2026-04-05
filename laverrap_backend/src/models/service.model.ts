@@ -23,19 +23,21 @@ export const serviceModel = {
     });
     return newService;
   },
-  async update({ serviceId, data } : { serviceId: number, data: Service }) {
+  async update({ serviceId, data, userId }: { serviceId: number, data: Service, userId: number }) {
     const updatedService = await prisma.service.update({
       where: {
         id: serviceId,
+        user_id: userId,
       },
       data,
     });
     return updatedService;
   },
-  async delete({ serviceId }: { serviceId: number }) {
+  async delete({ serviceId, userId }: { serviceId: number, userId: number }) {
     const deletedService = await prisma.service.delete({
       where: {
         id: serviceId,
+        user_id: userId,
       },
     });
     return deletedService;

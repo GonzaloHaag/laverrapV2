@@ -25,10 +25,11 @@ export const clientModel = {
     return newClient;
   },
 
-  async update({ clientId, data } : { clientId: number, data: Client }) {
+  async update({ clientId, data, userId } : { clientId: number, data: Client, userId: number }) {
     const updatedClient = await prisma.client.update({
       where: {
-        id: clientId
+        id: clientId,
+        user_id: userId
       },
       data
     });
@@ -55,10 +56,11 @@ export const clientModel = {
     return client;
   },
 
-  async deactivate({ clientId } : { clientId: number }) {
+  async deactivate({ clientId, userId } : { clientId: number, userId: number }) {
     const updatedClient = await prisma.client.update({
       where: {
-        id: clientId
+        id: clientId,
+        user_id: userId
       },
       data: {
         status: "INACTIVE"
@@ -67,15 +69,26 @@ export const clientModel = {
     return updatedClient;
   },
 
-  async activate({ clientId } : { clientId: number }) {
+  async activate({ clientId, userId } : { clientId: number, userId: number }) {
     const updatedClient = await prisma.client.update({
       where: {
-        id: clientId
+        id: clientId,
+        user_id: userId
       },
       data: {
         status: "ACTIVE"
       }
     });
     return updatedClient;
-  }
+  },
+
+  async getTotalActive({ userId }: { userId: number }) {
+    const totalActive = await prisma.client.count({
+      where: {
+        user_id: userId,
+        status: "ACTIVE"
+      }
+    });
+    return totalActive;
+  },
 };

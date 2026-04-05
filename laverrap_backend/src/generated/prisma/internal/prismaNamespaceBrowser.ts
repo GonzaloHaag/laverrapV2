@@ -140,7 +140,8 @@ export const WashingScalarFieldEnum = {
   service_id: 'service_id',
   status: 'status',
   should_notify: 'should_notify',
-  notified_at: 'notified_at'
+  notified_at: 'notified_at',
+  price: 'price'
 } as const
 
 export type WashingScalarFieldEnum = (typeof WashingScalarFieldEnum)[keyof typeof WashingScalarFieldEnum]

@@ -41,7 +41,7 @@ export const washingService = {
   async delete({ userId, washingId } : { userId: number, washingId: number }) {
     const existingWashing = await washingModel.getById({ userId, washingId });
     if(!existingWashing) throw new ClientError("Lavado no encontrado", 404);
-    const deletedWashing = await washingModel.delete({ washingId });
+    const deletedWashing = await washingModel.delete({ washingId, userId });
     return deletedWashing;
   }
 };

@@ -21,14 +21,14 @@ export const serviceService = {
       const serviceWithSameName = await serviceModel.getByName({ userId, name: data.name });
       if (serviceWithSameName) throw new ClientError("Ya existe un servicio con ese nombre", 400);
     }
-    const updatedService = await serviceModel.update({ serviceId, data });
+    const updatedService = await serviceModel.update({ serviceId, data, userId });
     return updatedService;
   },
 
   async delete({ userId, serviceId }: { userId: number; serviceId: number }) {
     const existingService = await serviceModel.getById({ userId, serviceId });
     if (!existingService) throw new ClientError("Servicio no encontrado", 404);
-    const deletedService = await serviceModel.delete({ serviceId });
+    const deletedService = await serviceModel.delete({ serviceId, userId });
     return deletedService;
   },
 };

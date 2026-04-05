@@ -32,6 +32,7 @@ export type WashingAvgAggregateOutputType = {
   employee_id: number | null
   client_id: number | null
   service_id: number | null
+  price: runtime.Decimal | null
 }
 
 export type WashingSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type WashingSumAggregateOutputType = {
   employee_id: number | null
   client_id: number | null
   service_id: number | null
+  price: runtime.Decimal | null
 }
 
 export type WashingMinAggregateOutputType = {
@@ -52,6 +54,7 @@ export type WashingMinAggregateOutputType = {
   status: $Enums.WashingStatus | null
   should_notify: boolean | null
   notified_at: Date | null
+  price: runtime.Decimal | null
 }
 
 export type WashingMaxAggregateOutputType = {
@@ -64,6 +67,7 @@ export type WashingMaxAggregateOutputType = {
   status: $Enums.WashingStatus | null
   should_notify: boolean | null
   notified_at: Date | null
+  price: runtime.Decimal | null
 }
 
 export type WashingCountAggregateOutputType = {
@@ -76,6 +80,7 @@ export type WashingCountAggregateOutputType = {
   status: number
   should_notify: number
   notified_at: number
+  price: number
   _all: number
 }
 
@@ -86,6 +91,7 @@ export type WashingAvgAggregateInputType = {
   employee_id?: true
   client_id?: true
   service_id?: true
+  price?: true
 }
 
 export type WashingSumAggregateInputType = {
@@ -94,6 +100,7 @@ export type WashingSumAggregateInputType = {
   employee_id?: true
   client_id?: true
   service_id?: true
+  price?: true
 }
 
 export type WashingMinAggregateInputType = {
@@ -106,6 +113,7 @@ export type WashingMinAggregateInputType = {
   status?: true
   should_notify?: true
   notified_at?: true
+  price?: true
 }
 
 export type WashingMaxAggregateInputType = {
@@ -118,6 +126,7 @@ export type WashingMaxAggregateInputType = {
   status?: true
   should_notify?: true
   notified_at?: true
+  price?: true
 }
 
 export type WashingCountAggregateInputType = {
@@ -130,6 +139,7 @@ export type WashingCountAggregateInputType = {
   status?: true
   should_notify?: true
   notified_at?: true
+  price?: true
   _all?: true
 }
 
@@ -229,6 +239,7 @@ export type WashingGroupByOutputType = {
   status: $Enums.WashingStatus
   should_notify: boolean
   notified_at: Date | null
+  price: runtime.Decimal
   _count: WashingCountAggregateOutputType | null
   _avg: WashingAvgAggregateOutputType | null
   _sum: WashingSumAggregateOutputType | null
@@ -236,7 +247,7 @@ export type WashingGroupByOutputType = {
   _max: WashingMaxAggregateOutputType | null
 }
 
-type GetWashingGroupByPayload<T extends WashingGroupByArgs> = Prisma.PrismaPromise<
+export type GetWashingGroupByPayload<T extends WashingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<WashingGroupByOutputType, T['by']> &
       {
@@ -264,6 +275,7 @@ export type WashingWhereInput = {
   status?: Prisma.EnumWashingStatusFilter<"Washing"> | $Enums.WashingStatus
   should_notify?: Prisma.BoolFilter<"Washing"> | boolean
   notified_at?: Prisma.DateTimeNullableFilter<"Washing"> | Date | string | null
+  price?: Prisma.DecimalFilter<"Washing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
@@ -280,6 +292,7 @@ export type WashingOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   should_notify?: Prisma.SortOrder
   notified_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   employee?: Prisma.EmployeeOrderByWithRelationInput
   client?: Prisma.ClientOrderByWithRelationInput
@@ -299,6 +312,7 @@ export type WashingWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumWashingStatusFilter<"Washing"> | $Enums.WashingStatus
   should_notify?: Prisma.BoolFilter<"Washing"> | boolean
   notified_at?: Prisma.DateTimeNullableFilter<"Washing"> | Date | string | null
+  price?: Prisma.DecimalFilter<"Washing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   employee?: Prisma.XOR<Prisma.EmployeeScalarRelationFilter, Prisma.EmployeeWhereInput>
   client?: Prisma.XOR<Prisma.ClientScalarRelationFilter, Prisma.ClientWhereInput>
@@ -315,6 +329,7 @@ export type WashingOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   should_notify?: Prisma.SortOrder
   notified_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrder
   _count?: Prisma.WashingCountOrderByAggregateInput
   _avg?: Prisma.WashingAvgOrderByAggregateInput
   _max?: Prisma.WashingMaxOrderByAggregateInput
@@ -335,6 +350,7 @@ export type WashingScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumWashingStatusWithAggregatesFilter<"Washing"> | $Enums.WashingStatus
   should_notify?: Prisma.BoolWithAggregatesFilter<"Washing"> | boolean
   notified_at?: Prisma.DateTimeNullableWithAggregatesFilter<"Washing"> | Date | string | null
+  price?: Prisma.DecimalWithAggregatesFilter<"Washing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateInput = {
@@ -342,6 +358,7 @@ export type WashingCreateInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
   user: Prisma.UserCreateNestedOneWithoutWashedInput
   employee: Prisma.EmployeeCreateNestedOneWithoutWashedInput
   client: Prisma.ClientCreateNestedOneWithoutWashedInput
@@ -358,6 +375,7 @@ export type WashingUncheckedCreateInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUpdateInput = {
@@ -365,6 +383,7 @@ export type WashingUpdateInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   user?: Prisma.UserUpdateOneRequiredWithoutWashedNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutWashedNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutWashedNestedInput
@@ -381,6 +400,7 @@ export type WashingUncheckedUpdateInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateManyInput = {
@@ -393,6 +413,7 @@ export type WashingCreateManyInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUpdateManyMutationInput = {
@@ -400,6 +421,7 @@ export type WashingUpdateManyMutationInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUncheckedUpdateManyInput = {
@@ -412,6 +434,7 @@ export type WashingUncheckedUpdateManyInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingListRelationFilter = {
@@ -434,6 +457,7 @@ export type WashingCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   should_notify?: Prisma.SortOrder
   notified_at?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type WashingAvgOrderByAggregateInput = {
@@ -442,6 +466,7 @@ export type WashingAvgOrderByAggregateInput = {
   employee_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   service_id?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type WashingMaxOrderByAggregateInput = {
@@ -454,6 +479,7 @@ export type WashingMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   should_notify?: Prisma.SortOrder
   notified_at?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type WashingMinOrderByAggregateInput = {
@@ -466,6 +492,7 @@ export type WashingMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   should_notify?: Prisma.SortOrder
   notified_at?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type WashingSumOrderByAggregateInput = {
@@ -474,6 +501,7 @@ export type WashingSumOrderByAggregateInput = {
   employee_id?: Prisma.SortOrder
   client_id?: Prisma.SortOrder
   service_id?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type WashingCreateNestedManyWithoutUserInput = {
@@ -661,6 +689,7 @@ export type WashingCreateWithoutUserInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
   employee: Prisma.EmployeeCreateNestedOneWithoutWashedInput
   client: Prisma.ClientCreateNestedOneWithoutWashedInput
   service: Prisma.ServiceCreateNestedOneWithoutWashedInput
@@ -675,6 +704,7 @@ export type WashingUncheckedCreateWithoutUserInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateOrConnectWithoutUserInput = {
@@ -716,6 +746,7 @@ export type WashingScalarWhereInput = {
   status?: Prisma.EnumWashingStatusFilter<"Washing"> | $Enums.WashingStatus
   should_notify?: Prisma.BoolFilter<"Washing"> | boolean
   notified_at?: Prisma.DateTimeNullableFilter<"Washing"> | Date | string | null
+  price?: Prisma.DecimalFilter<"Washing"> | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateWithoutEmployeeInput = {
@@ -723,6 +754,7 @@ export type WashingCreateWithoutEmployeeInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
   user: Prisma.UserCreateNestedOneWithoutWashedInput
   client: Prisma.ClientCreateNestedOneWithoutWashedInput
   service: Prisma.ServiceCreateNestedOneWithoutWashedInput
@@ -737,6 +769,7 @@ export type WashingUncheckedCreateWithoutEmployeeInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateOrConnectWithoutEmployeeInput = {
@@ -770,6 +803,7 @@ export type WashingCreateWithoutClientInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
   user: Prisma.UserCreateNestedOneWithoutWashedInput
   employee: Prisma.EmployeeCreateNestedOneWithoutWashedInput
   service: Prisma.ServiceCreateNestedOneWithoutWashedInput
@@ -784,6 +818,7 @@ export type WashingUncheckedCreateWithoutClientInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateOrConnectWithoutClientInput = {
@@ -817,6 +852,7 @@ export type WashingCreateWithoutServiceInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
   user: Prisma.UserCreateNestedOneWithoutWashedInput
   employee: Prisma.EmployeeCreateNestedOneWithoutWashedInput
   client: Prisma.ClientCreateNestedOneWithoutWashedInput
@@ -831,6 +867,7 @@ export type WashingUncheckedCreateWithoutServiceInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateOrConnectWithoutServiceInput = {
@@ -868,6 +905,7 @@ export type WashingCreateManyUserInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUpdateWithoutUserInput = {
@@ -875,6 +913,7 @@ export type WashingUpdateWithoutUserInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutWashedNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutWashedNestedInput
   service?: Prisma.ServiceUpdateOneRequiredWithoutWashedNestedInput
@@ -889,6 +928,7 @@ export type WashingUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUncheckedUpdateManyWithoutUserInput = {
@@ -900,6 +940,7 @@ export type WashingUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateManyEmployeeInput = {
@@ -911,6 +952,7 @@ export type WashingCreateManyEmployeeInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUpdateWithoutEmployeeInput = {
@@ -918,6 +960,7 @@ export type WashingUpdateWithoutEmployeeInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   user?: Prisma.UserUpdateOneRequiredWithoutWashedNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutWashedNestedInput
   service?: Prisma.ServiceUpdateOneRequiredWithoutWashedNestedInput
@@ -932,6 +975,7 @@ export type WashingUncheckedUpdateWithoutEmployeeInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUncheckedUpdateManyWithoutEmployeeInput = {
@@ -943,6 +987,7 @@ export type WashingUncheckedUpdateManyWithoutEmployeeInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateManyClientInput = {
@@ -954,6 +999,7 @@ export type WashingCreateManyClientInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUpdateWithoutClientInput = {
@@ -961,6 +1007,7 @@ export type WashingUpdateWithoutClientInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   user?: Prisma.UserUpdateOneRequiredWithoutWashedNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutWashedNestedInput
   service?: Prisma.ServiceUpdateOneRequiredWithoutWashedNestedInput
@@ -975,6 +1022,7 @@ export type WashingUncheckedUpdateWithoutClientInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUncheckedUpdateManyWithoutClientInput = {
@@ -986,6 +1034,7 @@ export type WashingUncheckedUpdateManyWithoutClientInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingCreateManyServiceInput = {
@@ -997,6 +1046,7 @@ export type WashingCreateManyServiceInput = {
   status?: $Enums.WashingStatus
   should_notify?: boolean
   notified_at?: Date | string | null
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUpdateWithoutServiceInput = {
@@ -1004,6 +1054,7 @@ export type WashingUpdateWithoutServiceInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   user?: Prisma.UserUpdateOneRequiredWithoutWashedNestedInput
   employee?: Prisma.EmployeeUpdateOneRequiredWithoutWashedNestedInput
   client?: Prisma.ClientUpdateOneRequiredWithoutWashedNestedInput
@@ -1018,6 +1069,7 @@ export type WashingUncheckedUpdateWithoutServiceInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 export type WashingUncheckedUpdateManyWithoutServiceInput = {
@@ -1029,6 +1081,7 @@ export type WashingUncheckedUpdateManyWithoutServiceInput = {
   status?: Prisma.EnumWashingStatusFieldUpdateOperationsInput | $Enums.WashingStatus
   should_notify?: Prisma.BoolFieldUpdateOperationsInput | boolean
   notified_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
 
@@ -1043,6 +1096,7 @@ export type WashingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   status?: boolean
   should_notify?: boolean
   notified_at?: boolean
+  price?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
@@ -1059,6 +1113,7 @@ export type WashingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   should_notify?: boolean
   notified_at?: boolean
+  price?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
@@ -1075,6 +1130,7 @@ export type WashingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   should_notify?: boolean
   notified_at?: boolean
+  price?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
   client?: boolean | Prisma.ClientDefaultArgs<ExtArgs>
@@ -1091,9 +1147,10 @@ export type WashingSelectScalar = {
   status?: boolean
   should_notify?: boolean
   notified_at?: boolean
+  price?: boolean
 }
 
-export type WashingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "user_id" | "employee_id" | "client_id" | "service_id" | "status" | "should_notify" | "notified_at", ExtArgs["result"]["washing"]>
+export type WashingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "user_id" | "employee_id" | "client_id" | "service_id" | "status" | "should_notify" | "notified_at" | "price", ExtArgs["result"]["washing"]>
 export type WashingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   employee?: boolean | Prisma.EmployeeDefaultArgs<ExtArgs>
@@ -1131,6 +1188,7 @@ export type $WashingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     status: $Enums.WashingStatus
     should_notify: boolean
     notified_at: Date | null
+    price: runtime.Decimal
   }, ExtArgs["result"]["washing"]>
   composites: {}
 }
@@ -1567,6 +1625,7 @@ export interface WashingFieldRefs {
   readonly status: Prisma.FieldRef<"Washing", 'WashingStatus'>
   readonly should_notify: Prisma.FieldRef<"Washing", 'Boolean'>
   readonly notified_at: Prisma.FieldRef<"Washing", 'DateTime'>
+  readonly price: Prisma.FieldRef<"Washing", 'Decimal'>
 }
     
 

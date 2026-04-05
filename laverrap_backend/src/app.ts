@@ -8,6 +8,7 @@ import { employeeRoutes } from "./routes/employee.routes.js";
 import { serviceRoutes } from "./routes/service.routes.js";
 import { clientRoutes } from "./routes/client.routes.js";
 import { washingRoutes } from "./routes/washing.routes.js";
+import { statsRoutes } from "./routes/stats.routes.js";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(`${config.API_BASE_URL}/employees`, employeeRoutes);
 app.use(`${config.API_BASE_URL}/services`, serviceRoutes);
 app.use(`${config.API_BASE_URL}/clients`, clientRoutes);
 app.use(`${config.API_BASE_URL}/washed`, washingRoutes);
+app.use(`${config.API_BASE_URL}/stats`, statsRoutes);
 app.get("/", (req, res) => {
   console.log("User request", req.user);
   res.send("Hello World");
