@@ -24,10 +24,9 @@ export const WashedPage = () => {
             isLoading={isLoading}
             columns={columns}
             data={data ?? []}
-            searchPlaceholder="Buscar por cliente..."
-            searchFilter="client_name"
             isError={isError}
-            filterByStatus={true}
+            searchPlaceholder="Buscar por nombre..."
+            searchFilter="name"
           />
         </CardContent>
       </Card>
