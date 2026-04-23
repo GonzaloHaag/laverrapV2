@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { createColumns, DialogClient } from "@/components/clients";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
 import { useClientMutations, useClients } from "@/hooks";
+import { ButtonDownloadPDF } from "@/components/shared";
 
 export const ClientsPage = () => {
   const { isLoading, data, isError } = useClients();
@@ -16,6 +17,7 @@ export const ClientsPage = () => {
             Administra los clientes de tu lavadero
           </CardDescription>
           <CardAction>
+            <ButtonDownloadPDF className="mr-4" />
             <DialogClient client={null} />
           </CardAction>
         </CardHeader>

@@ -64,7 +64,7 @@ export function DataTable<TData, TValue>({
 
   useEffect(() => {
     table.getColumn(searchFilter)?.setFilterValue(debouncedSearch);
-  },[ debouncedSearch, searchFilter ]);
+  },[ debouncedSearch, searchFilter, table ]);
 
   const onChangeFilter = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;

@@ -5,3 +5,4 @@ export { FormDialogFooter } from "./FormDialogFooter";
 export { InputSearch } from "./InputSearch";
 export { AlertDialogConfirm } from "./AlertDialogConfirm";
 export { CardPage } from "./CardPage";
+export { ButtonDownloadPDF } from "./ButtonDownloadPDF";

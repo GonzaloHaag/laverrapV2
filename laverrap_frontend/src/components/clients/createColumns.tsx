@@ -23,7 +23,7 @@ export const createColumns = ({ mutationDeactivate } : Props): ColumnDef<Client>
       return (
         <div className="flex flex-col">
           <Link to={`mailto:${client.email}`} target="_blank" rel="noopener noreferrer" title="Enviar correo" className="text-blue-500 hover:underline">{client.email}</Link>
-          <Link to={`tel:${client.phone}`} title="Llamar" className="text-blue-500 hover:underline">{client.phone}</Link>
+          <Link to={`tel:${client.phone}`} title="Llamar" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">{client.phone}</Link>
         </div>
       );
     }
