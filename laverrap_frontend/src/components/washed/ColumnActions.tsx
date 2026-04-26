@@ -1,5 +1,4 @@
 import type { Washing } from "@/types";
-import { AlertDialogConfirm } from "../shared";
 import { Button, Tooltip, TooltipContent, TooltipTrigger } from "../ui";
 import { BanIcon, CheckCircleIcon, PlayIcon } from "lucide-react";
 import { toast } from "sonner";
@@ -15,7 +14,7 @@ interface Props {
     status: Washing["status"];
 }, unknown>;
 }
-export const ColumnActions = ({ washing, mutationDelete, mutationUpdateStatus } : Props ) => {
+export const ColumnActions = ({ washing, mutationUpdateStatus } : Props ) => {
   const handleAction = async (status: Washing["status"]) => {
     if(washing.status === "COMPLETED") {
       toast.error("No se puede actualizar el estado de un lavado completado.");
@@ -30,10 +29,12 @@ export const ColumnActions = ({ washing, mutationDelete, mutationUpdateStatus } 
   };
   return (
     <div>
-      <AlertDialogConfirm id={washing.id} mutationDelete={mutationDelete} />
+      {/* <AlertDialogConfirm id={washing.id} mutationDelete={mutationDelete} /> */}
       <Tooltip>
         <TooltipTrigger render={
-          <Button variant="outline" size={"icon"} onClick={() => handleAction("CANCELED")} disabled={mutationUpdateStatus.isPending}><BanIcon className="text-red-500" /></Button>
+          <Button variant="outline" size={"icon"} onClick={() => handleAction("CANCELED")} disabled={mutationUpdateStatus.isPending || washing.status === "COMPLETED"}>
+            <BanIcon className="text-red-500" />
+          </Button>
         }>
         </TooltipTrigger>
         <TooltipContent>
@@ -42,7 +43,9 @@ export const ColumnActions = ({ washing, mutationDelete, mutationUpdateStatus } 
       </Tooltip>
       <Tooltip>
         <TooltipTrigger render={
-          <Button variant="outline" className="ml-2" size={"icon"} onClick={() => handleAction("IN_PROGRESS")} disabled={mutationUpdateStatus.isPending}><PlayIcon /></Button>
+          <Button variant="outline" className="ml-2" size={"icon"} onClick={() => handleAction("IN_PROGRESS")} disabled={mutationUpdateStatus.isPending || washing.status === "COMPLETED"}>
+            <PlayIcon />
+          </Button>
         }>
         </TooltipTrigger>
         <TooltipContent>
@@ -51,7 +54,9 @@ export const ColumnActions = ({ washing, mutationDelete, mutationUpdateStatus } 
       </Tooltip>
       <Tooltip>
         <TooltipTrigger render={
-          <Button variant="outline" className="ml-2"  size={"icon"} onClick={() => handleAction("COMPLETED")} disabled={mutationUpdateStatus.isPending}><CheckCircleIcon className="text-green-500" /></Button>
+          <Button variant="outline" className="ml-2"  size={"icon"} onClick={() => handleAction("COMPLETED")} disabled={mutationUpdateStatus.isPending || washing.status === "COMPLETED"}>
+            <CheckCircleIcon className="text-green-500" />
+          </Button>
         }>
         </TooltipTrigger>
         <TooltipContent>

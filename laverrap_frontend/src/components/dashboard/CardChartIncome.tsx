@@ -1,96 +1,46 @@
-import { TrendingUp } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
-
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "@/components/ui/Chart";
+import { CURRENT_YEAR, MONTHS } from "@/utils/consts";
+import { ChartIncome } from "./ChartIncome";
 
-export const description = "Ingresos mensuales";
+interface Props {
+  isLoading: boolean;
+  totalIncomeGroupByMonth: {
+    month: number;
+    income: number;
+  }[];
+}
 
-const chartData = [
-  { month: "Enero", ingresos: 186 },
-  { month: "Febrero", ingresos: 305 },
-  { month: "Marzo", ingresos: 237 },
-  { month: "Abril", ingresos: 73 },
-  { month: "Mayo", ingresos: 209 },
-  { month: "Junio", ingresos: 214 },
-  { month: "July", ingresos: 186 },
-  { month: "August", ingresos: 305 },
-  { month: "September", ingresos: 237 },
-  { month: "October", ingresos: 73 },
-  { month: "November", ingresos: 209 },
-  { month: "December", ingresos: 214 },
-];
 
-const chartConfig = {
-  ingresos: {
-    label: "ingresos",
-    color: "var(--chart-1)",
-  },
-} satisfies ChartConfig;
-
-export const CardChartIncome = () => {
+export const CardChartIncome = ({ isLoading, totalIncomeGroupByMonth } : Props) => {
+  const chartData = totalIncomeGroupByMonth.map((item) => ({
+    month: MONTHS[item.month - 1], /** Para que comience en enero que es MONTHS[0] */
+    income: item.income
+  }));
   return (
     <Card>
       <CardHeader>
         <CardTitle>Ingresos mensuales</CardTitle>
         <CardDescription>
-          Mostrando ingresos totales por mes en el último semestre
+          Mostrando ingresos totales por mes en {CURRENT_YEAR}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
-          <AreaChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
-            />
-            <Area
-              dataKey="ingresos"
-              type="natural"
-              fill="var(--color-ingresos)"
-              fillOpacity={0.4}
-              stroke="var(--color-ingresos)"
-            />
-          </AreaChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 leading-none font-medium">
-              Tendencia al alza en un 5.2% este mes{" "}
-              <TrendingUp className="h-4 w-4" />
+        {
+          isLoading ? (
+            <div className="flex items-center justify-center min-h-48">
+              <span className="text-sm text-gray-800">Cargando datos...</span>
             </div>
-          </div>
-        </div>
-      </CardFooter>
+          ) : (
+            <ChartIncome data={chartData} />
+          )
+        }
+      </CardContent>
     </Card>
   );
 };

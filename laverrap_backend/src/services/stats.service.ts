@@ -3,11 +3,14 @@ import { washingModel } from "../models/washing.model.js";
 
 export const statsService = {
   async getStats({ userId }: { userId: number }) {
-    const [totalIncome, totalWashed, totalActiveClients] = await Promise.all([
+    const [totalIncomeByCurrentMonth, totalIncome, totalWashed, totalActiveClients, totalIncomeGroupByMonth, totalWashedGroupByMonth] = await Promise.all([
+      washingModel.getTotalIncomeByCurrentMonth({ userId }),
       washingModel.getTotalIncome({ userId }),
       washingModel.getTotalWashed({ userId }),
-      clientModel.getTotalActive({ userId })
+      clientModel.getTotalActive({ userId }),
+      washingModel.getTotalIncomeGroupByMonth({ userId }),
+      washingModel.getTotalWashedGroupByMonth({ userId })
     ]);
-    return { totalIncome, totalWashed, totalActiveClients };
-  }
+    return { totalIncomeByCurrentMonth, totalIncome, totalWashed, totalActiveClients, totalIncomeGroupByMonth, totalWashedGroupByMonth };
+  } 
 };

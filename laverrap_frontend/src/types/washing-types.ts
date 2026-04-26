@@ -22,3 +22,4 @@ export interface Washing {
         name: string;
     };
 }
+

@@ -1,3 +1,4 @@
+import { useState, type ChangeEvent } from "react";
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -17,11 +18,9 @@ import {
   TableRow,
 } from "@/components/ui/Table";
 import { InputSearch } from "../shared";
-import { useEffect, useState, type ChangeEvent } from "react";
 import { DataTablePagination } from "./DataTablePagination";
 import { NativeSelect, NativeSelectOption } from "./NativeSelect";
-import { WASHING_STATUS_OPTIONS } from "@/utils/consts";
-import { useDebounce } from "@/hooks";
+import type { Option } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -31,6 +30,7 @@ interface DataTableProps<TData, TValue> {
   searchFilter: string;
   searchPlaceholder?: string;
   filterByStatus?: boolean;
+  options?: Option[];
 }
 
 export function DataTable<TData, TValue>({
@@ -41,10 +41,10 @@ export function DataTable<TData, TValue>({
   searchPlaceholder = "Buscar...",
   isError,
   filterByStatus = false,
+  options
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [searchValue, setSearchValue] = useState<string>("");
-  const debouncedSearch = useDebounce(searchValue);
   const table = useReactTable({
     data,
     columns,
@@ -62,13 +62,10 @@ export function DataTable<TData, TValue>({
     }
   });
 
-  useEffect(() => {
-    table.getColumn(searchFilter)?.setFilterValue(debouncedSearch);
-  },[ debouncedSearch, searchFilter, table ]);
-
   const onChangeFilter = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchValue(value);
+    table.getColumn(searchFilter)?.setFilterValue(value);
   };
 
   const onChangeFilterStatus = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -85,10 +82,11 @@ export function DataTable<TData, TValue>({
           <NativeSelect
             value={(table.getColumn("status")?.getFilterValue() as string) ?? ""}
             onChange={onChangeFilterStatus}
+            className="w-full max-w-60"
           >
             <NativeSelectOption value="">Todos los estados</NativeSelectOption>
             {
-              WASHING_STATUS_OPTIONS.map((option) => (
+              options && options.map((option) => (
                 <NativeSelectOption key={option.id} value={option.value}>{option.label}</NativeSelectOption>
               ))
             }

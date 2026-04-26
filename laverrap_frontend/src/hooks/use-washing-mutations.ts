@@ -14,11 +14,10 @@ export const useWashingMutations = () => {
 
   const mutationUpdateStatus = useMutation({
     mutationFn: washingService.updateStatus,
-    onSuccess: (data) => {
-      invalidateWashed();
+    onSuccess: async (data) => {
+      await invalidateWashed();
       if(data.status === "COMPLETED") {
-        invalidateEmployees();
-        invalidateStats();
+        await Promise.all([invalidateEmployees(), invalidateStats()]);
       }
     }
   });

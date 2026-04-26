@@ -7,27 +7,25 @@ export const useClientMutations = () => {
   const invalidateStats = () => queryClient.invalidateQueries({ queryKey: ["stats"] });
   const mutationCreate = useMutation({
     mutationFn: clientService.create,
-    onSuccess: (data) => {
-      invalidateClients();
+    onSuccess: async (data) => {
+      await invalidateClients();
       if(data.status === "ACTIVE") {
-        invalidateStats();
+        await invalidateStats();
       }
     }
   });
 
   const mutationUpdate = useMutation({
     mutationFn: clientService.update,
-    onSuccess: () => {
-      invalidateClients();
-      invalidateStats();
+    onSuccess: async () => {
+      await Promise.all([invalidateClients(), invalidateStats()]);
     }
   });
 
   const mutationDeactivate = useMutation({
     mutationFn: clientService.deactivate,
-    onSuccess: () => {
-      invalidateClients();
-      invalidateStats();
+    onSuccess: async () => {
+      await Promise.all([invalidateClients(), invalidateStats()]);
     }
   });
 

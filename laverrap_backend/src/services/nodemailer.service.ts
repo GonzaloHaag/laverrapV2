@@ -14,8 +14,7 @@ export const nodemailerService = {
         from: "gonzalohaag1311@gmail.com",
         to: to,
         subject: "Lavado finalizado!",
-        text: "Su lavado ha sido finalizado. Puedes pasar a retirar el vehículo cuando quieras.",
-        html: "<p>Su lavado ha sido finalizado.</p>",
+        html: "<p>Su lavado ha sido finalizado. Puedes pasar a retirar el vehículo cuando quieras.</p>",
       });   
       console.log("Email enviado", info.messageId);
     }

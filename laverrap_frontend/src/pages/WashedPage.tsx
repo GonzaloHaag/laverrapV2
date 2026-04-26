@@ -1,7 +1,8 @@
+import { useMemo } from "react";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle, DataTable } from "@/components/ui";
 import { createColumns, DialogWashing } from "@/components/washed";
 import { useWashed, useWashingMutations } from "@/hooks";
-import { useMemo } from "react";
+import { WASHING_STATUS_OPTIONS } from "@/utils/consts";
 
 export const WashedPage = () => {
   const { isLoading, isError, data } = useWashed();
@@ -11,9 +12,9 @@ export const WashedPage = () => {
     <section className="flex flex-col gap-y-4">
       <Card>
         <CardHeader>
-          <CardTitle>Empleados</CardTitle>
+          <CardTitle>Lavados</CardTitle>
           <CardDescription>
-            Administra los empleados de tu lavadero
+            Administra los lavados de tu lavadero
           </CardDescription>
           <CardAction>
             <DialogWashing washing={null} />
@@ -25,8 +26,10 @@ export const WashedPage = () => {
             columns={columns}
             data={data ?? []}
             isError={isError}
-            searchPlaceholder="Buscar por nombre..."
-            searchFilter="name"
+            searchPlaceholder="Buscar por cliente..."
+            searchFilter="client_name"
+            filterByStatus
+            options={WASHING_STATUS_OPTIONS}
           />
         </CardContent>
       </Card>

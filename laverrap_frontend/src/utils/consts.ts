@@ -64,3 +64,26 @@ export const WASHING_STATUS_OPTIONS = [
   { id: 3, value: "COMPLETED", label: "Completado" },
   { id: 4, value: "CANCELED", label: "Cancelado" },
 ];
+
+export const CLIENT_STATUS_OPTIONS = [
+  { id: 1, value: "ACTIVE", label: "Activo" },
+  { id: 2, value: "INACTIVE", label: "Inactivo" },
+];
+
+export const CURRENT_YEAR = new Date().getFullYear();
+
+export const MONTHS = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+export const chartIncomeConfig = {
+  income: {
+    label: "Ingresos",
+    color: "var(--chart-1)",
+  },
+};
+
+export const chartWashedConfig = {
+  washed: {
+    label: "Lavados",
+    color: "var(--chart-1)",
+  },
+};

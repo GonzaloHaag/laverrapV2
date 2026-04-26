@@ -1,6 +1,5 @@
 import { CardChartIncome, CardChartWashed, SectionCards } from "@/components/dashboard";
 import { useStats } from "@/hooks";
-
 export const DashboardPage = () => {
   const { isLoading, isError, data } = useStats();
   return (
@@ -13,22 +12,25 @@ export const DashboardPage = () => {
       </div>
       {
         isError ? (
-          <div className="p-4 bg-red-100 text-red-700 rounded">
+          <div className="p-4 bg-red-100 text-red-700 rounded text-sm">
             Error al cargar las estadísticas. Por favor, inténtalo de nuevo más tarde.
           </div>
         ) : (
-          <SectionCards 
-            totalIncome={data?.totalIncome ?? 0} 
-            totalWashed={data?.totalWashed ?? 0} 
-            totalActiveClients={data?.totalActiveClients ?? 0} 
-            isLoading={isLoading} 
-          />
+          <div className="flex flex-col gap-y-4">
+            <SectionCards 
+              totalIncomeByCurrentMonth={data?.totalIncomeByCurrentMonth ?? 0}
+              totalIncome={data?.totalIncome ?? 0} 
+              totalWashed={data?.totalWashed ?? 0} 
+              totalActiveClients={data?.totalActiveClients ?? 0} 
+              isLoading={isLoading} 
+            />
+            <div className="grid md:grid-cols-2 gap-4">
+              <CardChartIncome  isLoading={isLoading} totalIncomeGroupByMonth={data?.totalIncomeGroupByMonth ?? []} />
+              <CardChartWashed isLoading={isLoading} totalWashedGroupByMonth={data?.totalWashedGroupByMonth ?? []} />
+            </div>
+          </div>
         )
       }
-      <div className="grid md:grid-cols-2 gap-4">
-        <CardChartIncome />
-        <CardChartWashed />
-      </div>
     </section>
   );
 };

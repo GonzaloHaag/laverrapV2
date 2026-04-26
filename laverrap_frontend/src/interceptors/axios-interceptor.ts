@@ -33,8 +33,12 @@ export const axiosInterceptor = () => {
   // Cualquier código de estado que este fuera del rango de 2xx causa la ejecución de esta función
   // Haz algo con el error
     const status = error.response?.status;
-    if(status === 401 || status === 403) {
-      toast.error("Iniciá sesión nuevamente para continuar");
+    if(error.response?.data?.message === "Token invalido") {
+      toast.error("Tu sesión ha expirado, inicia sesión nuevamente");
+      return Promise.reject(new Error("Token inválido"));
+    }
+    if(status === 401) {
+      toast.error("Credenciales inválidas, inicia sesión nuevamente");
       return Promise.reject(new Error("Credenciales inválidas"));
     }
     if(status === 500) {

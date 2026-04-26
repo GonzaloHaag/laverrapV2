@@ -3,7 +3,6 @@ import jwt  from "jsonwebtoken";
 import { config } from "../config.js";
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1]; // Obtener el token del header Authorization
-  console.log("Token auth", token);
   if (!token) {
     return res.status(401).json({ ok:false, message: "No se envio el token" });
   }

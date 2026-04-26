@@ -1,6 +1,7 @@
 import { prisma } from "../lib/prisma.js";
 import type { Washing } from "../schemas/washing.schema.js";
 import type { WashingStatus } from "../types/washing.types.js";
+import { firstDayOfMonth, firstDayOfYear, lastDayOfMonth, lastDayOfYear } from "../utils/consts.js";
 import { ClientError } from "../utils/errors.js";
 
 
@@ -146,5 +147,78 @@ export const washingModel = {
       }
     });
     return totalWashed;
+  },
+
+  async getTotalIncomeByCurrentMonth({ userId } : { userId: number }) {
+    const totalIncome = await prisma.washing.aggregate({
+      where: { 
+        user_id: userId,
+        status: "COMPLETED",
+        created_at: {
+          gte: firstDayOfMonth, /** Mayor o igual al primer día del mes */
+          lte: lastDayOfMonth /** Menor o igual al último día del mes */
+        }
+      },
+      _sum: {
+        price: true
+      }
+    });
+    return totalIncome._sum.price ?? 0;
+  },
+  
+  async getTotalIncomeGroupByMonth({ userId } : { userId: number }) {
+    // const washed = await prisma.washing.findMany({
+    //   where: {
+    //     user_id: userId,
+    //     status: "COMPLETED",
+    //     created_at: { gte: firstDayOfYear, lte: lastDayOfYear }
+    //   },
+    //   select: {
+    //     created_at: true,
+    //     price: true
+    //   }
+    // });
+
+    // return Array.from({ length: 12 }, (_, index) => ({
+    //   month: index+1,
+    //   income: washed.filter((w) => w.created_at.getMonth() === index).reduce((acc, w) => acc + (w.price ?? 0).toNumber(), 0)
+    // }));
+    const washed = await prisma.$queryRaw<{ month: number, income: number }[]>`SELECT EXTRACT(MONTH FROM created_at) AS month, 
+     SUM(price) AS income
+     FROM "Washing" 
+     WHERE user_id = ${userId} 
+     AND status = 'COMPLETED' 
+     AND created_at >= ${firstDayOfYear} 
+     AND created_at <= ${lastDayOfYear}
+     GROUP by month 
+     ORDER by month`;
+
+    const result = Array.from({ length: 12 }, (_, index) => {
+      const month = index + 1;
+      const found = washed.find((w) => Number(w.month) === month);
+      return { month, income: found ? Number(found.income) : 0 };
+    });
+
+    return result;
+  },
+
+  async getTotalWashedGroupByMonth({ userId } : { userId: number }) {
+    const washed = await prisma.$queryRaw<{ month: number, washed: number }[]>`SELECT EXTRACT(MONTH FROM created_at) AS month, 
+     COUNT(*) AS washed
+     FROM "Washing" 
+     WHERE user_id = ${userId} 
+     AND status = 'COMPLETED' 
+     AND created_at >= ${firstDayOfYear} 
+     AND created_at <= ${lastDayOfYear}
+     GROUP by month 
+     ORDER by month`;
+
+    const result = Array.from({ length: 12 }, (_, index) => {
+      const month = index + 1;
+      const found = washed.find((w) => Number(w.month) === month);
+      return { month, washed: found ? Number(found.washed) : 0 };
+    });
+
+    return result;
   }
 };
