@@ -41,7 +41,7 @@ export const createColumns = ({ mutationDelete } : Props): ColumnDef<Service>[] 
     cell: ({ row }) => {
       const category: ServiceCategory = row.getValue("category");
       return (
-        <Badge variant={category === "COMPLETE" ? "default" : "outline"} title={formatServiceCategory[category]}>
+        <Badge variant={category === "PREMIUM" ? "default" : "outline"} title={formatServiceCategory[category]}>
           {formatServiceCategory[category]}
         </Badge>
       );

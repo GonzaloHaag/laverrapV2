@@ -167,22 +167,6 @@ export const washingModel = {
   },
   
   async getTotalIncomeGroupByMonth({ userId } : { userId: number }) {
-    // const washed = await prisma.washing.findMany({
-    //   where: {
-    //     user_id: userId,
-    //     status: "COMPLETED",
-    //     created_at: { gte: firstDayOfYear, lte: lastDayOfYear }
-    //   },
-    //   select: {
-    //     created_at: true,
-    //     price: true
-    //   }
-    // });
-
-    // return Array.from({ length: 12 }, (_, index) => ({
-    //   month: index+1,
-    //   income: washed.filter((w) => w.created_at.getMonth() === index).reduce((acc, w) => acc + (w.price ?? 0).toNumber(), 0)
-    // }));
     const washed = await prisma.$queryRaw<{ month: number, income: number }[]>`SELECT EXTRACT(MONTH FROM created_at) AS month, 
      SUM(price) AS income
      FROM "Washing" 
