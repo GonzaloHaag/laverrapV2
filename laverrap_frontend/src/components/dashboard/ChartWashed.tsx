@@ -6,7 +6,7 @@ interface Props {
 }
 export const ChartWashed = ({ data }: Props) => {
   return (
-    <ChartContainer config={chartWashedConfig}>
+    <ChartContainer config={chartWashedConfig} className="w-full h-full">
       <AreaChart
         accessibilityLayer
         data={data}

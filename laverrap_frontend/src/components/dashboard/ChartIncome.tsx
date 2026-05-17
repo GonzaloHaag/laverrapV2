@@ -9,7 +9,7 @@ interface Props {
 }
 export const ChartIncome = ({ data }: Props) => {
   return (
-    <ChartContainer config={chartIncomeConfig}>
+    <ChartContainer config={chartIncomeConfig} className="w-full h-full">
       <AreaChart
         accessibilityLayer
         data={data}

@@ -1,7 +1,8 @@
-import { CardChartIncome, CardChartWashed, SectionCards } from "@/components/dashboard";
-import { useStats } from "@/hooks";
+import { CardChartIncome, CardChartWashed, CardRecentWashed, SectionCards } from "@/components/dashboard";
+import { useStats, useWashed } from "@/hooks";
 export const DashboardPage = () => {
   const { isLoading, isError, data } = useStats();
+  const { isLoading: isLoadingWashed, isError: isErrorWashed, data: dataWashed } = useWashed();
   return (
     <section className="flex flex-col gap-y-4">
       <div className="flex flex-col gap-0">
@@ -27,6 +28,9 @@ export const DashboardPage = () => {
             <div className="grid md:grid-cols-2 gap-4">
               <CardChartIncome  isLoading={isLoading} totalIncomeGroupByMonth={data?.totalIncomeGroupByMonth ?? []} />
               <CardChartWashed isLoading={isLoading} totalWashedGroupByMonth={data?.totalWashedGroupByMonth ?? []} />
+            </div>
+            <div className="w-full">
+              <CardRecentWashed isLoading={isLoadingWashed} isError={isErrorWashed} data={dataWashed ?? []} />
             </div>
           </div>
         )
